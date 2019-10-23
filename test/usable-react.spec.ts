@@ -3,7 +3,7 @@ import './mocks/browser';
 
 @TestFixture('`usable-react` Tests')
 export class UsableReactTestFixture {
-  @Test('Sets default items in storage')
+  @Test('Tests coming soon')
   public helloWorldTest() {
     Expect(true).toBeTruthy();
   }
