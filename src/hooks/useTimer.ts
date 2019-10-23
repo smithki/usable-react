@@ -3,25 +3,29 @@ import { useCompare } from './useCompare';
 
 export interface TimerHook {
   /**
-   * Starts the timer. It is recommended to invoke this function inside another
-   * React hook or `useEffect` to avoid unpredictable behavior.
+   * Starts the timer.
    */
   start: () => void;
 
   /**
-   * Stops the timer. It is recommended to invoke this function inside another
-   * React hook or `useEffect` to avoid unpredictable behavior.
+   * Pauses the timer. This function has no effect if the timer has not yet
+   * started.
    */
-  stop: () => void;
+  pause: () => void;
 
   /**
-   * Resets the timer. It is recommended to invoke this function inside another
-   * React hook or `useEffect` to avoid unpredictable behavior.
-   *
-   * @param newLength - Optionally provide a new total length (in milliseconds)
-   * for the timer.
+   * Resumes the timer. This function has no effect if the timer has not yet
+   * started.
    */
-  reset: (newLength?: number) => void;
+  resume: () => void;
+
+  /**
+   * Resets the timer.
+   *
+   * @param newLength - Optionally provide a new timer length (in milliseconds).
+   * @param newTick - Optionally provide a new tick length (in milliseconds).
+   */
+  reset: (newLength?: number, newTick?: number) => void;
 
   /** The amount of time (in milliseconds) remaining in the timer. */
   remaining: number;
@@ -43,19 +47,31 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
   const [remaining, setRemaining] = useState(length);
   const [isRunning, setIsRunning] = useState(false);
   const [lengthState, setLengthState] = useState(length);
+  const [tickState, setTickState] = useState(tick);
+  const isStarted = useRef(false);
 
   const start = useCallback(() => {
-    if (!isRunning) setIsRunning(true);
+    if (!isRunning && !isStarted.current) {
+      setIsRunning(true);
+      isStarted.current = true;
+    }
   }, [isRunning]);
 
-  const stop = useCallback(() => {
-    if (isRunning) setIsRunning(false);
+  const pause = useCallback(() => {
+    if (isRunning && isStarted.current) setIsRunning(false);
+  }, [isRunning]);
+
+  const resume = useCallback(() => {
+    if (!isRunning && isStarted.current) setIsRunning(true);
   }, [isRunning]);
 
   const reset = useCallback(
-    (newLength?: number) => {
+    (newLength?: number, newTick?: number) => {
+      if (newTick) setTickState(newTick);
       if (newLength) setLengthState(newLength);
+      if (isRunning) setIsRunning(false);
       setRemaining(newLength || lengthState);
+      isStarted.current = false;
     },
     [lengthState],
   );
@@ -63,8 +79,8 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
   useEffect(() => {
     if (isRunning && remaining > 0) {
       const timeout = setTimeout(() => {
-        setRemaining(remaining - tick);
-      }, tick);
+        setRemaining(remaining - tickState);
+      }, tickState);
 
       return () => clearTimeout(timeout);
     }
@@ -79,9 +95,17 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
     }
 
     return;
-  }, [remaining, isRunning]);
+  }, [remaining, isRunning, tickState]);
 
-  return { start, stop, reset, remaining, isRunning, length: lengthState };
+  return {
+    start,
+    pause,
+    resume,
+    reset,
+    remaining,
+    isRunning,
+    length: lengthState,
+  };
 }
 
 /**
