@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "test-dist"
+    "outDir": "test-dist",
+    "module": "commonjs",
+    "experimentalDecorators": true
   },
   "include": [
     "test/**/*"
