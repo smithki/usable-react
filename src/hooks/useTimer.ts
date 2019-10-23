@@ -69,13 +69,13 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
       return () => clearTimeout(timeout);
     }
 
-    if (remaining < 0) {
-      setRemaining(0);
-      stop();
+    if (isRunning && remaining === 0) {
+      setIsRunning(false);
     }
 
-    if (remaining === 0 && isRunning) {
-      stop();
+    if (isRunning && remaining < 0) {
+      setRemaining(0);
+      setIsRunning(false);
     }
 
     return;
