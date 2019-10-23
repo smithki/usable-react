@@ -38,14 +38,14 @@ export interface TimerHook {
  */
 export function useTimer(length: number, tick: number = 1000): TimerHook {
   const [remaining, setRemaining] = useState(length);
-  const isRunning = useRef(false);
+  const [isRunning, setIsRunning] = useState(false);
 
   const start = useCallback(() => {
-    isRunning.current = true;
-  }, []);
+    if (!isRunning) setIsRunning(true);
+  }, [isRunning]);
 
   const stop = useCallback(() => {
-    isRunning.current = false;
+    if (isRunning) setIsRunning(false);
   }, []);
 
   const reset = useCallback(() => {
@@ -53,7 +53,7 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
   }, []);
 
   useEffect(() => {
-    if (!!isRunning.current && remaining > 0) {
+    if (isRunning && remaining > 0) {
       const timeout = setTimeout(() => {
         setRemaining(remaining - tick);
       }, tick);
@@ -66,14 +66,14 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
       stop();
     }
 
-    if (remaining === 0 && !!isRunning.current) {
+    if (remaining === 0 && isRunning) {
       stop();
     }
 
     return;
-  }, [remaining]);
+  }, [remaining, isRunning]);
 
-  return { start, stop, reset, remaining, length, isRunning: !!isRunning.current };
+  return { start, stop, reset, remaining, length, isRunning };
 }
 
 /**
@@ -84,7 +84,7 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
  * @param deps - If present, effect will only activate if the values in the list change.
  */
 export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: readonly any[] = []) {
-  const { isRunning, remaining, length } = timer;
+  const { isRunning, remaining } = timer;
   const didTimerChange = useCompare(remaining);
 
   useEffect(() => {
