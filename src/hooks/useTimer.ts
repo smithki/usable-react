@@ -17,8 +17,11 @@ export interface TimerHook {
   /**
    * Resets the timer. It is recommended to invoke this function inside another
    * React hook or `useEffect` to avoid unpredictable behavior.
+   *
+   * @param newLength - Optionally provide a new total length (in milliseconds)
+   * for the timer.
    */
-  reset: () => void;
+  reset: (newLength?: number) => void;
 
   /** The amount of time (in milliseconds) remaining in the timer. */
   remaining: number;
@@ -39,6 +42,7 @@ export interface TimerHook {
 export function useTimer(length: number, tick: number = 1000): TimerHook {
   const [remaining, setRemaining] = useState(length);
   const [isRunning, setIsRunning] = useState(false);
+  const [lengthState, setLengthState] = useState(length);
 
   const start = useCallback(() => {
     if (!isRunning) setIsRunning(true);
@@ -46,11 +50,15 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
 
   const stop = useCallback(() => {
     if (isRunning) setIsRunning(false);
-  }, []);
+  }, [isRunning]);
 
-  const reset = useCallback(() => {
-    setRemaining(length);
-  }, []);
+  const reset = useCallback(
+    (newLength?: number) => {
+      if (newLength) setLengthState(newLength);
+      setRemaining(newLength || lengthState);
+    },
+    [lengthState],
+  );
 
   useEffect(() => {
     if (isRunning && remaining > 0) {
@@ -73,7 +81,7 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
     return;
   }, [remaining, isRunning]);
 
-  return { start, stop, reset, remaining, length, isRunning };
+  return { start, stop, reset, remaining, isRunning, length: lengthState };
 }
 
 /**
