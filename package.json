@@ -1,0 +1,54 @@
+{
+  "name": "usable-react",
+  "version": "0.1.0",
+  "description": "Basic React hooks to get any project off the ground.",
+  "author": "Ian K Smith <hello@iks.codes>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smithki/usable-react"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.m.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "dev": "npm-run-all -s clean:dist -p compile_watch",
+    "build": "npm-run-all -s clean:dist -p compile",
+    "lint": "tslint --fix -p .",
+    "compile": "microbundle build src/index.ts --name UsableReact --target web --external react",
+    "compile_watch": "microbundle watch src/index.ts --name UsableReact --target web --external react",
+    "clean": "npm-run-all -s clean:*",
+    "clean:dist": "rimraf dist && rimraf test-dist",
+    "clean:cache": "rimraf .rts2_cache_*",
+    "test": "npm-run-all -s clean:test-dist test:*",
+    "test:compile": "tsc -p ./tsconfig.test.json",
+    "test:run": "alsatian ./test-dist/**/*.spec.js",
+    "test_watch": "npm-run-all -s test:compile -p test_watch:*",
+    "test_watch:compile": "tsc -w -p ./tsconfig.test.json",
+    "test_watch:run": "chokidar \"./test-dist/**/*.spec.js\" -c \"npm run test:run\" --initial \"npm run test:run\""
+  },
+  "devDependencies": {
+    "@ikscodes/tslint-config": "^5.3.1",
+    "@types/node": "^12.11.5",
+    "@types/react": "^16.9.9",
+    "alsatian": "^2.4.0",
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "microbundle": "^0.8.4",
+    "mock-browser": "^0.92.14",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.14.0",
+    "react": "^16.11.0",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  },
+  "peerDependencies": {
+    "react": "^16.11.0"
+  }
+}

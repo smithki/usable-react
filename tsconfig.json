@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es2018", "dom"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "downlevelIteration": true,
+    "target": "es5",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "declaration": true,
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
