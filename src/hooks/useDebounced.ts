@@ -9,11 +9,11 @@ export function useDebounced<T>(value: T, delay: number = 300) {
   const [debouncedValue, setDebouncedValue] = useState<T>((undefined as unknown) as T);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const id = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(id);
   }, [delay, isSynchronous, value]);
 
   return isSynchronous ? value : debouncedValue;

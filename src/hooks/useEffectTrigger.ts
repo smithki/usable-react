@@ -1,4 +1,4 @@
-import { EffectCallback, useCallback, useEffect, useState } from 'react';
+import { EffectCallback, useCallback, useEffect, useRef, useState } from 'react';
 import { useCompare } from './useCompare';
 
 /**
@@ -16,10 +16,15 @@ import { useCompare } from './useCompare';
 export function useEffectTrigger(effect: EffectCallback, deps: readonly any[] = []) {
   const [trigger, setTrigger] = useState(0);
   const didTriggerUpdate = useCompare(trigger);
+  const savedCallback = useRef(effect);
+
+  useEffect(() => {
+    savedCallback.current = effect;
+  }, [effect]);
 
   useEffect(() => {
     if (didTriggerUpdate) {
-      return effect();
+      return savedCallback.current();
     }
   }, [trigger, ...deps]);
 
