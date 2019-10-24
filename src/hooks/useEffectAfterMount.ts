@@ -1,4 +1,4 @@
-import { EffectCallback, useEffect } from 'react';
+import { EffectCallback, useEffect, useRef } from 'react';
 import { useInitialRender } from './useInitialRender';
 
 /**
@@ -7,9 +7,15 @@ import { useInitialRender } from './useInitialRender';
  */
 export function useEffectAfterMount(effect: EffectCallback, deps?: readonly any[]) {
   const isInitialRender = useInitialRender();
+  const savedCallback = useRef(effect);
+
+  useEffect(() => {
+    savedCallback.current = effect;
+  }, [effect]);
+
   useEffect(() => {
     if (!isInitialRender) {
-      return effect();
+      return savedCallback.current();
     }
   }, deps);
 }

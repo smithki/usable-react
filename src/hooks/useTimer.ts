@@ -43,12 +43,25 @@ export interface TimerHook {
  * @param length - The total length of the timer (in milliseconds).
  * @param tick - The interval at which to update the timer (in milliseconds).
  */
-export function useTimer(length: number, tick: number = 1000): TimerHook {
+export function useTimer(options: { length: number; tick?: number; autoStart?: boolean }): TimerHook {
+  const optionsWithDefaults = { ...{ tick: 1000, autoStart: false }, ...options };
+  const { length, tick, autoStart } = optionsWithDefaults;
+
   const [remaining, setRemaining] = useState(length);
-  const [isRunning, setIsRunning] = useState(false);
-  const [lengthState, setLengthState] = useState(length);
-  const [tickState, setTickState] = useState(tick);
-  const isStarted = useRef(false);
+  const [isRunning, setIsRunning] = useState(autoStart);
+  const lengthRef = useRef(length);
+  const tickRef = useRef(tick);
+  const isStarted = useRef(autoStart);
+
+  // Save the latest `tick` value.
+  useEffect(() => {
+    tickRef.current = tick;
+  }, [tick]);
+
+  // Save the latest `length` value.
+  useEffect(() => {
+    lengthRef.current = length;
+  }, [length]);
 
   const start = useCallback(() => {
     if (!isRunning && !isStarted.current) {
@@ -58,31 +71,29 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
   }, [isRunning]);
 
   const pause = useCallback(() => {
-    if (isRunning && isStarted.current) setIsRunning(false);
+    if (isRunning) setIsRunning(false);
   }, [isRunning]);
 
   const resume = useCallback(() => {
     if (!isRunning && isStarted.current) setIsRunning(true);
   }, [isRunning]);
 
-  const reset = useCallback(
-    (newLength?: number, newTick?: number) => {
-      if (newTick) setTickState(newTick);
-      if (newLength) setLengthState(newLength);
-      if (isRunning) setIsRunning(false);
-      setRemaining(newLength || lengthState);
-      isStarted.current = false;
-    },
-    [lengthState],
-  );
+  const reset = useCallback((newLength?: number, newTick?: number) => {
+    if (newTick) tickRef.current = newTick;
+    if (newLength) lengthRef.current = newLength;
+    if (isRunning) setIsRunning(false);
+    setRemaining(newLength || lengthRef.current);
+    isStarted.current = false;
+  }, []);
 
+  // Update the timer.
   useEffect(() => {
     if (isRunning && remaining > 0) {
-      const timeout = setTimeout(() => {
-        setRemaining(remaining - tickState);
-      }, tickState);
+      const id = setTimeout(() => {
+        setRemaining(remaining - tickRef.current);
+      }, tickRef.current);
 
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(id);
     }
 
     if (isRunning && remaining === 0) {
@@ -95,7 +106,7 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
     }
 
     return;
-  }, [remaining, isRunning, tickState]);
+  }, [remaining, isRunning]);
 
   return {
     start,
@@ -104,7 +115,7 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
     reset,
     remaining,
     isRunning,
-    length: lengthState,
+    length: lengthRef.current,
   };
 }
 
@@ -118,10 +129,15 @@ export function useTimer(length: number, tick: number = 1000): TimerHook {
 export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: readonly any[] = []) {
   const { isRunning, remaining } = timer;
   const didTimerChange = useCompare(remaining);
+  const savedCallback = useRef(effect);
+
+  useEffect(() => {
+    savedCallback.current = effect;
+  }, [effect]);
 
   useEffect(() => {
     if (isRunning && didTimerChange && remaining > 0) {
-      return effect();
+      return savedCallback.current();
     }
   }, [remaining, isRunning, ...deps]);
 }
@@ -136,10 +152,15 @@ export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: r
 export function useTimerComplete(timer: TimerHook, effect: EffectCallback, deps: readonly any[] = []) {
   const { remaining } = timer;
   const didTimerChange = useCompare(remaining);
+  const savedCallback = useRef(effect);
+
+  useEffect(() => {
+    savedCallback.current = effect;
+  }, [effect]);
 
   useEffect(() => {
     if (didTimerChange && remaining <= 0) {
-      return effect();
+      return savedCallback.current();
     }
   }, [remaining, ...deps]);
 }
