@@ -1,12 +1,6 @@
-import { EffectCallback, useCallback, useEffect, useRef } from 'react';
+import { EffectCallback, useEffect, useRef } from 'react';
 import { useEffectTrigger } from './useEffectTrigger';
 import { useInitialRender } from './useInitialRender';
-import { useTimer, useTimerEffect } from './useTimer';
-
-export interface IntervalHook {
-  /** Clear the interval, preventing further side-effects. */
-  clear: () => void;
-}
 
 /**
  * Executes the given effect on an interval.

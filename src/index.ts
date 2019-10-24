@@ -7,5 +7,5 @@ export { useEffectTrigger } from './hooks/useEffectTrigger';
 export { useDebounced } from './hooks/useDebounced';
 export { useForceUpdate } from './hooks/useForceUpdate';
 export { useEffectAfterMount } from './hooks/useEffectAfterMount';
-export { useInterval, IntervalHook } from './hooks/useInterval';
+export { useInterval } from './hooks/useInterval';
 export { useTimer, useTimerComplete, useTimerEffect, TimerHook } from './hooks/useTimer';
