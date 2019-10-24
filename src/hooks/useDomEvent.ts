@@ -1,26 +1,24 @@
-import { MutableRefObject, RefObject, useCallback, useEffect, useRef } from 'react';
+import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 import { isDocument, isElement, isRefObject, isWindow } from '../utils/type-guards';
-
-export type UseDomEventRemoveListenerFunction = () => void;
 
 export type UseDomEventAddListenerFunction<T extends HTMLElement | Window | Document> = T extends HTMLElement
   ? <K extends keyof HTMLElementEventMap>(
       eventName: K,
       listener: (this: T, event: HTMLElementEventMap[K]) => any,
       options?: boolean | AddEventListenerOptions | undefined,
-    ) => UseDomEventRemoveListenerFunction
+    ) => void
   : (T extends Window
       ? <K extends keyof WindowEventMap>(
           eventName: K,
           listener: (this: T, event: WindowEventMap[K]) => any,
           options?: boolean | AddEventListenerOptions,
-        ) => UseDomEventRemoveListenerFunction
+        ) => void
       : (T extends Document
           ? <K extends keyof DocumentEventMap>(
               eventName: K,
               listener: (this: T, event: DocumentEventMap[K]) => any,
               options?: boolean | AddEventListenerOptions,
-            ) => UseDomEventRemoveListenerFunction
+            ) => void
           : never));
 
 /**
@@ -31,7 +29,7 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
   element: T | MutableRefObject<T> | RefObject<T>,
 ) {
   const addListener: UseDomEventAddListenerFunction<T> = ((...eventListenerParams: any[]) => {
-    const [type, listener, options] = eventListenerParams as Parameters<T['addEventListener']>;
+    const [eventName, listener, options] = eventListenerParams as Parameters<T['addEventListener']>;
     const savedListener = useRef(listener);
     const savedOptions = useRef(options);
 
@@ -46,38 +44,24 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
     useEffect(() => {
       if (isWindow(element) || isDocument(element) || isElement(element)) {
         const listener = (e: any) => (savedListener.current as any)(e);
-        element.addEventListener(type, listener);
+        element.addEventListener(eventName, listener, savedOptions.current);
         return () => {
-          element.removeEventListener(type, listener);
+          element.removeEventListener(eventName, listener, savedOptions.current);
         };
       }
 
       if (isRefObject<T>(element)) {
         if (!!element.current && isElement(element.current)) {
           const listener = (e: any) => (savedListener.current as any)(e);
-          element.current.addEventListener(type, listener);
+          element.current.addEventListener(eventName, listener, savedOptions.current);
           return () => {
-            element.current!.removeEventListener(type, listener);
+            element.current!.removeEventListener(eventName, listener, savedOptions.current);
           };
         }
       }
 
       return;
-    }, [type, element]);
-
-    const removeListener = useCallback(() => {
-      if (isWindow(element) || isDocument(element) || isElement(element)) {
-        element.removeEventListener(type, listener);
-      }
-
-      if (isRefObject<T>(element)) {
-        if (!!element.current && isElement(element.current)) {
-          element.current!.removeEventListener(type, listener);
-        }
-      }
-    }, [type, element]);
-
-    return removeListener;
+    }, [eventName, element]);
   }) as UseDomEventAddListenerFunction<T>;
 
   return addListener;
