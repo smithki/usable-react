@@ -63,6 +63,8 @@ export function useTimer(options: { length: number; tick?: number; autoStart?: b
     lengthRef.current = length;
   }, [length]);
 
+  // Build timer functionality callbacks.
+
   const start = useCallback(() => {
     if (!isRunning && !isStarted.current) {
       setIsRunning(true);
@@ -78,13 +80,16 @@ export function useTimer(options: { length: number; tick?: number; autoStart?: b
     if (!isRunning && isStarted.current) setIsRunning(true);
   }, [isRunning]);
 
-  const reset = useCallback((newLength?: number, newTick?: number) => {
-    if (newTick) tickRef.current = newTick;
-    if (newLength) lengthRef.current = newLength;
-    if (isRunning) setIsRunning(false);
-    setRemaining(newLength || lengthRef.current);
-    isStarted.current = false;
-  }, []);
+  const reset = useCallback(
+    (newLength?: number, newTick?: number) => {
+      if (newTick) tickRef.current = newTick;
+      if (newLength) lengthRef.current = newLength;
+      if (isRunning) setIsRunning(false);
+      setRemaining(newLength || lengthRef.current);
+      isStarted.current = false;
+    },
+    [isRunning],
+  );
 
   // Update the timer.
   useEffect(() => {
