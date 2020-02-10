@@ -5,7 +5,7 @@ import { useInitialRender } from './useInitialRender';
 /**
  * Executes the given effect on an interval.
  */
-export function useInterval(effect: EffectCallback, deps: readonly any[], interval: number = 1000) {
+export function useInterval(effect: EffectCallback, deps: readonly any[], interval = 1000) {
   const savedCallback = useRef(effect);
   const isInitialRender = useInitialRender();
   const isCleared = useRef(false);
@@ -18,6 +18,7 @@ export function useInterval(effect: EffectCallback, deps: readonly any[], interv
   // Set up the interval.
   const triggerInterval = useEffectTrigger(() => {
     if (!isInitialRender && !isCleared.current) return savedCallback.current();
+    return undefined;
   }, [...deps]);
 
   useEffect(() => {

@@ -17,5 +17,7 @@ export function useEffectAfterMount(effect: EffectCallback, deps?: readonly any[
     if (!isInitialRender) {
       return savedCallback.current();
     }
+
+    return undefined;
   }, deps);
 }
