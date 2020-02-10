@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-initial-render",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
