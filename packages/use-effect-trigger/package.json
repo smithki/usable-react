@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "microbundle watch src/index.ts --format es,cjs --target web --external react",
     "build": "microbundle build src/index.ts  --format es,cjs --target web --external react",
+    "lint": "eslint --fix src/**/*.{ts,tsx}",
     "clean": "rimraf dist"
   },
   "peerDependencies": {

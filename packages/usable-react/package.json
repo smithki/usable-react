@@ -19,6 +19,7 @@
   "scripts": {
     "dev": "microbundle watch src/index.ts --name UsableReact --target web --external react",
     "build": "microbundle build src/index.ts --name UsableReact --target web --external react",
+    "lint": "eslint --fix src/**/*.{ts,tsx}",
     "clean": "rimraf dist"
   },
   "peerDependencies": {
