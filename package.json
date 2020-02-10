@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "0.5.2",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "exec": "lerna exec --scope $PKG -- $@",
@@ -8,7 +9,7 @@
     "clean": "./scripts/clean.sh",
     "lint": "./scripts/lint.sh",
     "test": "echo \"No tests to run!\"",
-    "version": "lerna version patch --no-git-tag-version --no-push",
+    "version": "lerna version patch --no-git-tag-version",
     "release": "lerna publish from-package --yes",
     "release_canary": "lerna publish from-package --canary --yes"
   },
@@ -39,6 +40,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "version": "0.5.2"
+  ]
 }
