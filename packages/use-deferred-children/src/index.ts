@@ -6,7 +6,7 @@ import { useInitialRender } from '@usable-react/use-initial-render';
  *
  * @source https://github.com/reactjs/react-transition-group/blob/master/src/SwitchTransition.js#L6
  */
-function areReactChildrenDifferent (
+function areReactChildrenDifferent(
   oldChildren: ReactElement | ReactElement[],
   newChildren: ReactElement | ReactElement[],
 ) {
@@ -22,8 +22,7 @@ function areReactChildrenDifferent (
   }
 
   return true;
-};
-
+}
 
 /**
  * Get a copy of the given `children`, deferred to the next update.

@@ -5,6 +5,7 @@
     "exec": "lerna exec --scope $PKG -- $@",
     "dev": "./scripts/clean.sh && ./scripts/dev.sh",
     "build": "./scripts/clean.sh && ./scripts/build.sh",
+    "lint": "./scripts/lint.sh",
     "test": "echo \"No tests to run!\"",
     "release": "lerna publish from-package --yes",
     "release_canary": "lerna publish from-package --canary --yes"
