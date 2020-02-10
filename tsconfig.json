@@ -16,7 +16,7 @@
     "declaration": true,
   },
   "include": [
-    "src/**/*", "foo.ts",
+    "packages/**/*.ts"
   ],
   "exclude": [
     "node_modules"
