@@ -187,7 +187,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Lint source files
-          command: npx lerna run lint lint
+          command: npx lerna run lint
 
   # Builds modules and persists the build output to the workspace.
   build:
