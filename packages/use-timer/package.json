@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-timer",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,6 +26,6 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-compare": "0.5.1"
+    "@usable-react/use-compare": "^0.5.2"
   }
 }
