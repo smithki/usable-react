@@ -14,7 +14,7 @@
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.m.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/usable-react/src/index.d.ts",
   "unpkg": "dist/index.umd.js",
   "scripts": {
     "dev": "microbundle watch src/index.ts --name UsableReact --target web --external react",
