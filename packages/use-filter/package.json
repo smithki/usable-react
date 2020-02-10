@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-filter",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-compare": "^0.5.2",
-    "@usable-react/use-hash": "^0.5.2",
-    "@usable-react/use-timer": "^0.5.2",
+    "@usable-react/use-compare": "^0.5.3",
+    "@usable-react/use-hash": "^0.5.3",
+    "@usable-react/use-timer": "^0.5.3",
     "fuse.js": "3.4.6"
   }
 }

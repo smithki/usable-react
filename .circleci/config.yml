@@ -212,7 +212,7 @@ jobs:
           name: Run tests
           command: npx lerna run test
 
-  # Publish the package to NPM. This should depend on the `build` job.
+  # Publish the packages to NPM. This should depend on the `build` job.
   create-release:
     executor: default
     steps:
@@ -222,10 +222,10 @@ jobs:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
-          name: Publish package to NPM
+          name: Publish packages to NPM
           command: npx lerna publish from-package --yes
 
-  # Publish the package as a pre-release version to NPM. This should depend on
+  # Publish the packages as a pre-release versions to NPM. This should depend on
   # the `build` job.
   create-prerelease:
     executor: default
@@ -236,7 +236,7 @@ jobs:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
-          name: Publish pre-release package to NPM
+          name: Publish pre-release packages to NPM
           command: npx lerna publish from-package --canary --yes
 
   # Create a git tag for this release and push to the remote repository.
@@ -246,7 +246,7 @@ jobs:
       - checkout
       - *attach-workspace
       - run:
-          name: Git tag the release with the `package.json` version number
+          name: Git tag the release with the `lerna.json` version number
           command: |
             PACKAGE_VERSION=$(node -pe "require('./lerna.json')['version']")
             git tag v$PACKAGE_VERSION
@@ -305,7 +305,7 @@ workflows:
             - build
 
   # Builds modules, verifies code with the linter, runs unit tests, and
-  # publishes the built package to NPM.
+  # publishes the built packages to NPM.
   publish-to-npm:
     jobs:
       - install-dependencies: *filter-release-branches-only
