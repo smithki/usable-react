@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "npm-run-all -s clean:dist -p compile_watch",
     "build": "npm-run-all -s clean:dist -p compile",
-    "lint": "tslint --fix -p .",
+    "lint": "eslint --fix src/**/*.{ts,tsx}",
     "compile": "microbundle build src/index.ts --name UsableReact --target web --external react",
     "compile_watch": "microbundle watch src/index.ts --name UsableReact --target web --external react",
     "clean": "npm-run-all -s clean:*",
