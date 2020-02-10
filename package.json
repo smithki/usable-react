@@ -9,7 +9,7 @@
     "clean": "./scripts/clean.sh",
     "lint": "./scripts/lint.sh",
     "test": "echo \"No tests to run!\"",
-    "version": "lerna version patch --no-git-tag-version",
+    "version": "lerna version --no-git-tag-version",
     "release": "lerna publish from-package --yes",
     "release_canary": "lerna publish from-package --canary --yes"
   },
