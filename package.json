@@ -24,7 +24,8 @@
     "compile_watch": "microbundle watch src/index.ts --name UsableReact --target web --external react",
     "clean": "npm-run-all -s clean:*",
     "clean:dist": "rimraf dist",
-    "clean:cache": "rimraf .rts2_cache_*"
+    "clean:cache": "rimraf .rts2_cache_*",
+    "test": "echo \"No tests to run!\""
   },
   "devDependencies": {
     "@ikscodes/eslint-config": "^6.2.0",
