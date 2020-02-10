@@ -18,9 +18,9 @@ while test $# -gt 0; do
 done
 
 if [ $PKG ] ; then
-  if [ CLEAN_CACHE = true ]; then lerna exec --scope $PKG -- yarn clean:dist ; fi
-  if [ CLEAN_CACHE = true ]; then lerna exec --scope $PKG -- yarn clean:cache ; fi
+  if [ $CLEAN_DIST = true ]; then lerna exec --scope $PKG -- yarn clean:dist ; fi
+  if [ $CLEAN_CACHE = true ]; then lerna exec --scope $PKG -- yarn clean:cache ; fi
 else
-  if [ CLEAN_CACHE = true ]; then lerna run clean:dist ; fi
-  if [ CLEAN_CACHE = true ]; then lerna run clean:cache ; fi
+  if [ $CLEAN_DIST = true ]; then lerna run clean:dist ; fi
+  if [ $CLEAN_CACHE = true ]; then lerna run clean:cache ; fi
 fi

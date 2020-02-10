@@ -292,17 +292,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-default-branches
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
   # Builds modules, verifies code with the linter, runs unit tests, and
   # publishes the built package to NPM.
@@ -310,17 +310,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-release-branches-only
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
         # Manual approval step as a final gatekeeper to prevent
         # possible mistakes!
@@ -350,17 +350,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-prerelease-branches-only
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
       - create-prerelease:
           requires:
