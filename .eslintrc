@@ -1,0 +1,17 @@
+{
+  "extends": ["@ikscodes/eslint-config"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "import/extensions": 0,
+    "@typescript-eslint/no-empty-function": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "directory": ["tsconfig.json"]
+      }
+    }
+  }
+}

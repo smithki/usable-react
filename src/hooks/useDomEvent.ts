@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+
 import { MutableRefObject, RefObject, useCallback, useEffect, useRef } from 'react';
 import { isDocument, isElement, isRefObject, isWindow } from '../utils/type-guards';
 
@@ -8,19 +10,19 @@ export type UseDomEventAddListenerFunction<T extends HTMLElement | Window | Docu
       listener: (this: T, event: HTMLElementEventMap[K]) => any,
       options?: boolean | AddEventListenerOptions | undefined,
     ) => UseDomEventRemoveListenerFunction
-  : (T extends Window
-      ? <K extends keyof WindowEventMap>(
-          eventName: K,
-          listener: (this: T, event: WindowEventMap[K]) => any,
-          options?: boolean | AddEventListenerOptions,
-        ) => UseDomEventRemoveListenerFunction
-      : (T extends Document
-          ? <K extends keyof DocumentEventMap>(
-              eventName: K,
-              listener: (this: T, event: DocumentEventMap[K]) => any,
-              options?: boolean | AddEventListenerOptions,
-            ) => UseDomEventRemoveListenerFunction
-          : never));
+  : T extends Window
+  ? <K extends keyof WindowEventMap>(
+      eventName: K,
+      listener: (this: T, event: WindowEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ) => UseDomEventRemoveListenerFunction
+  : T extends Document
+  ? <K extends keyof DocumentEventMap>(
+      eventName: K,
+      listener: (this: T, event: DocumentEventMap[K]) => any,
+      options?: boolean | AddEventListenerOptions,
+    ) => UseDomEventRemoveListenerFunction
+  : never;
 
 /**
  * Returns a `boolean` indicating whether the given `value` has changed since
@@ -64,7 +66,7 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
         }
       }
 
-      return;
+      return undefined;
     }, [eventName, element]);
 
     return useCallback(() => removeListenerRef.current(), [eventName, element]);

@@ -110,7 +110,7 @@ export function useTimer(options: { length: number; tick?: number; autoStart?: b
       setIsRunning(false);
     }
 
-    return;
+    return undefined;
   }, [remaining, isRunning]);
 
   return {
@@ -144,6 +144,8 @@ export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: r
     if (isRunning && didTimerChange && remaining > 0) {
       return savedCallback.current();
     }
+
+    return undefined;
   }, [remaining, isRunning, ...deps]);
 }
 
@@ -167,5 +169,7 @@ export function useTimerComplete(timer: TimerHook, effect: EffectCallback, deps:
     if (didTimerChange && remaining <= 0) {
       return savedCallback.current();
     }
+
+    return undefined;
   }, [remaining, ...deps]);
 }

@@ -26,6 +26,8 @@ export function useEffectTrigger(effect: EffectCallback, deps: readonly any[] = 
     if (didTriggerUpdate) {
       return savedCallback.current();
     }
+
+    return undefined;
   }, [trigger, ...deps]);
 
   return useCallback(() => setTrigger(trigger + 1), [trigger]);
