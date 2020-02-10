@@ -8,6 +8,7 @@
     "clean": "./scripts/clean.sh",
     "lint": "./scripts/lint.sh",
     "test": "echo \"No tests to run!\"",
+    "version": "lerna version patch --no-git-tag-version --no-push",
     "release": "lerna publish from-package --yes",
     "release_canary": "lerna publish from-package --canary --yes"
   },
@@ -36,5 +37,8 @@
     "rimraf": "^2.6.1",
     "typescript": "^3.0.3"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "version": "0.5.2"
 }
