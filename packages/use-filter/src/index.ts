@@ -2,7 +2,8 @@ import Fuse from 'fuse.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useCompare } from '@usable-react/use-compare';
 import { useHash } from '@usable-react/use-hash';
-import { useTimer } from '@usable-react/use-timer';
+import { useTimer, useTimerComplete } from '@usable-react/use-timer';
+import { useEffectTrigger } from '../../usable-react/src';
 
 interface UseFilterOptions<TData> {
   needle?: string;
@@ -35,16 +36,21 @@ export function useFilter<TData = any>({ needle, haystack, debounce, searchOptio
   const didHaystackChange = useCompare(haystackHash);
   const didOptionsChange = useCompare(optionsHash);
 
+  const search = useEffectTrigger(() => {
+    const fuse = new Fuse<TData, Fuse.FuseOptions<TData>>(haystack || [], optionsWithDefaults);
+    if (needle) setResults(fuse.search(needle) as TData[]);
+  }, [needle, haystackHash, optionsHash, debounce]);
+
   // Execute a search if the needle/haystack changes.
   useEffect(() => {
     if (!cooldownTimer.isRunning && (didNeedleChange || didHaystackChange || didOptionsChange)) {
       cooldownTimer.reset(debounce);
       cooldownTimer.start();
-
-      const fuse = new Fuse<TData, Fuse.FuseOptions<TData>>(haystack || [], optionsWithDefaults);
-      if (needle) setResults(fuse.search(needle) as TData[]);
+      search();
     }
-  }, [needle, haystackHash, debounce, optionsHash]);
+  }, [needle, haystackHash, optionsHash, debounce, search]);
+
+  useTimerComplete(cooldownTimer, () => search(), [search]);
 
   return results;
 }
