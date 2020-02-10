@@ -187,7 +187,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Lint source files
-          command: npx lerna exec -- yarn lint
+          command: npx lerna run lint lint
 
   # Builds modules and persists the build output to the workspace.
   build:
@@ -197,7 +197,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Build modules
-          command: npx lerna exec -- yarn build
+          command: npx lerna run build
       - persist_to_workspace:
           paths: *build-output-paths
           root: *workspace-root
@@ -210,7 +210,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Run tests
-          command: npx lerna exec -- yarn test
+          command: npx lerna run test
 
   # Publish the package to NPM. This should depend on the `build` job.
   create-release:
