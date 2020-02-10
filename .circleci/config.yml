@@ -2,20 +2,40 @@
 #                               CI INSTRUCTIONS                                #
 #                               ~~~~~~~~~~~~~~~                                #
 #   This configuration is optimized for continuous delivery of NPM packages    #
-#                                 using Yarn.                                  #
+#                      using Lerna (fixed version) + Yarn.                     #
 # ---------------------------------------------------------------------------- #
 #                                                                              #
-#  1) Publish the initial version of your NPM package manually, ensuring the   #
-#     correct org scope and settings.                                          #
+#  1) Install & initialize Lerna: `yarn add -D lerna && lerna init`            #
 #                                                                              #
 #                                                                              #
-#  2) Environment variables required in CircleCI:                              #
+#  2) Publish the initial version of your NPM packages manually, ensuring the  #
+#     correct org scope and settings: `lerna publish`                          #
+#                                                                              #
+#                                                                              #
+#  3) Environment variables required in CircleCI:                              #
 #                                                                              #
 #            $NPM_TOKEN -- NPM publishing auth token.                          #
 #    $GITHUB_REPO_TOKEN -- GitHub repo-scoped auth token (for use with GREN).  #
 #                                                                              #
 #                                                                              #
-#  3) The following branches should be created & protected on GitHub:          #
+#  4) The following configuration should be added in your root `package.json`: #
+#                                                                              #
+#        {                                                                     #
+#          "workspaces": [                                                     #
+#            "packages/*"                                                      #
+#          ]                                                                   #
+#        }                                                                     #
+#                                                                              #
+#                                                                              #
+#  5) The following configuration should be added to your `lerna.json`:        #
+#                                                                              #
+#        {                                                                     #
+#          "npmClient": "yarn",                                                #
+#          "useWorkspaces": true                                               #
+#        }                                                                     #
+#                                                                              #
+#                                                                              #
+#  6) The following branches should be created & protected on GitHub:          #
 #                                                ^^^^^^^^^                     #
 #         master -- Production code (currently published NPM version).         #
 #           next -- Pre-release code (published under the `next` tag on NPM).  #
@@ -23,19 +43,20 @@
 #                   as the default branch!                                     #
 #                                                                              #
 #                                                                              #
-#  4) The following scripts should be created in `package.json`:               #
+#  7) The following scripts should be created in each lerna package's own      #
+#     `package.json`:                                                          #
 #                                                                              #
-#        lint -- Run a linter against source files.                            #
-#       build -- Build output required for publishing to NPM.                  #
-#        test -- Run unit/integration/e2e tests.                               #
+#           lint -- Run a linter against source files.                         #
+#          build -- Build output required for publishing to NPM.               #
+#           test -- Run unit/integration/e2e tests.                            #
 #                                                                              #
 #                                                                              #
-#  5) Ensure the aliases for `&dependency-paths` and `&build-output-paths`     #
+#  8) Ensure the aliases for `&dependency-paths` and `&build-output-paths`     #
 #     below properly reflect the dependency and output directories of your     #
 #     app or module.                                                           #
 #                                                                              #
 #                                                                              #
-#  6) [OPTIONAL] Configure GREN to your liking using `.grenrc`.                #
+#  9) [OPTIONAL] Configure GREN to your liking using `.grenrc`.                #
 #                                                                              #
 #     See: https://github.com/github-tools/github-release-notes                #
 #                                                                              #
@@ -49,17 +70,46 @@ aliases: [
   # List of dependency paths that should be persisted to the
   # CircleCI workspace.
   &dependency-paths [
-    "node_modules"
+    "node_modules",
+    "packages/usable-react/node_modules",
+    "packages/use-compare/node_modules",
+    "packages/use-debounced/node_modules",
+    "packages/use-deferred-children/node_modules",
+    "packages/use-dom-event/node_modules",
+    "packages/use-effect-after-mount/node_modules",
+    "packages/use-effect-trigger/node_modules",
+    "packages/use-filter/node_modules",
+    "packages/use-force-update/node_modules",
+    "packages/use-hash/node_modules",
+    "packages/use-hash-compare/node_modules",
+    "packages/use-initial-render/node_modules",
+    "packages/use-interval/node_modules",
+    "packages/use-previous/node_modules",
+    "packages/use-timer/node_modules",
   ],
 
   # List of build output paths that should be persisted to the
   # CircleCI workspace.
   &build-output-paths [
-    "dist"
+    "packages/usable-react/dist",
+    "packages/use-compare/dist",
+    "packages/use-debounced/dist",
+    "packages/use-deferred-children/dist",
+    "packages/use-dom-event/dist",
+    "packages/use-effect-after-mount/dist",
+    "packages/use-effect-trigger/dist",
+    "packages/use-filter/dist",
+    "packages/use-force-update/dist",
+    "packages/use-hash/dist",
+    "packages/use-hash-compare/dist",
+    "packages/use-initial-render/dist",
+    "packages/use-interval/dist",
+    "packages/use-previous/dist",
+    "packages/use-timer/dist",
   ],
 
   # Yarn lockfile cache key (update "vN" => "vN+1" to cache-bust).
-  &dependency-cache-key "v1-dependency-cache-{{ checksum \"yarn.lock\" }}",
+  &dependency-cache-key "v2-dependency-cache-{{ checksum \"yarn.lock\" }}",
 
   &workspace-root "/home/circleci/project",
 
@@ -118,7 +168,10 @@ jobs:
           key: *dependency-cache-key
       - run:
           name: Install Module Dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
+      - run:
+          name: Lerna Bootstrap
+          command: npx lerna bootstrap
       - save_cache:
           paths: *dependency-paths
           key: *dependency-cache-key
@@ -134,7 +187,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Lint source files
-          command: yarn lint
+          command: npx lerna run lint
 
   # Builds modules and persists the build output to the workspace.
   build:
@@ -144,7 +197,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Build modules
-          command: yarn build
+          command: npx lerna run build
       - persist_to_workspace:
           paths: *build-output-paths
           root: *workspace-root
@@ -157,7 +210,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Run tests
-          command: yarn test
+          command: npx lerna run test
 
   # Publish the package to NPM. This should depend on the `build` job.
   create-release:
@@ -170,7 +223,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
           name: Publish package to NPM
-          command: npm publish
+          command: npx lerna publish from-package --yes
 
   # Publish the package as a pre-release version to NPM. This should depend on
   # the `build` job.
@@ -184,7 +237,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
           name: Publish pre-release package to NPM
-          command: npm publish --tag next
+          command: npx lerna publish from-package --canary --yes
 
   # Create a git tag for this release and push to the remote repository.
   tag-release:
@@ -195,12 +248,12 @@ jobs:
       - run:
           name: Git tag the release with the `package.json` version number
           command: |
-            PACKAGE_VERSION=$(node -pe "require('./package.json')['version']")
+            PACKAGE_VERSION=$(node -pe "require('./lerna.json')['version']")
             git tag v$PACKAGE_VERSION
       - run:
           name: Push git tag to the remote repository
           command: |
-            PACKAGE_VERSION=$(node -pe "require('./package.json')['version']")
+            PACKAGE_VERSION=$(node -pe "require('./lerna.json')['version']")
             git push -q https://$GITHUB_REPO_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git v$PACKAGE_VERSION
 
   # Create release notes on GitHub using the `github-release-notes` package.
@@ -239,17 +292,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-default-branches
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
   # Builds modules, verifies code with the linter, runs unit tests, and
   # publishes the built package to NPM.
@@ -257,17 +310,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-release-branches-only
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
         # Manual approval step as a final gatekeeper to prevent
         # possible mistakes!
@@ -297,17 +350,17 @@ workflows:
     jobs:
       - install-dependencies: *filter-prerelease-branches-only
 
-      - lint:
+      - build:
           requires:
             - install-dependencies
 
-      - build:
-          requires:
-            - lint
-
       - test:
           requires:
-            - lint
+            - install-dependencies
+
+      - lint:
+          requires:
+            - build
 
       - create-prerelease:
           requires:
