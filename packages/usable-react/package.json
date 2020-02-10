@@ -21,7 +21,8 @@
     "build": "microbundle build src/index.ts --name UsableReact --target web --external react",
     "lint": "eslint --fix src/**/*.ts",
     "test": "echo \"No tests to run!\"",
-    "clean": "rimraf dist"
+    "clean:dist": "rimraf dist",
+    "clean:cache": "rimraf node_modules/.cache"
   },
   "peerDependencies": {
     "react": "^16.11.0"

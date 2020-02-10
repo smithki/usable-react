@@ -109,7 +109,7 @@ aliases: [
   ],
 
   # Yarn lockfile cache key (update "vN" => "vN+1" to cache-bust).
-  &dependency-cache-key "v1-dependency-cache-{{ checksum \"yarn.lock\" }}",
+  &dependency-cache-key "v2-dependency-cache-{{ checksum \"yarn.lock\" }}",
 
   &workspace-root "/home/circleci/project",
 
