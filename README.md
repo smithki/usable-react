@@ -34,7 +34,7 @@ npm install @usable-react/use-force-update
 `usable-react` is managed as a monorepo so that hooks can be used collectively, or optimized as separate dependencies.
 
 | Package Name | Description |
-| ----------------- | ------------ | ----------- |
+| ------------ | ----------- |
 | [`usable-react`](./packages/usable-react) | A package containing all the hooks! |
 | [`@usable-react/use-compare`](./packages/use-compare) | Check if a value has changed since the last render. |
 | [`@usable-react/use-debounced`](./packages/use-debounced) | Debounce an incoming change to the given value. |
