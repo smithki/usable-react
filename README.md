@@ -33,23 +33,23 @@ npm install @usable-react/use-force-update
 
 `usable-react` is managed as a monorepo so that hooks can be used collectively, or optimized as separate dependencies.
 
-| Package directory | Package Name | Description |
+| Package Name | Description |
 | ----------------- | ------------ | ----------- |
-| [`usable-react`](./packages/usable-react) | `usable-react` | A package containing all the hooks! |
-| [`use-compare`](./packages/use-compare) | `@usable-react/use-compare` | Check if a value has changed since the last render. |
-| [`use-debounced`](./packages/use-debounced) | `@usable-react/use-debounced` | Debounce an incoming change to the given value. |
-| [`use-deferred-children`](./packages/use-deferred-children) | `@usable-react/use-deferred-children` | Get a copy of the given React `children`, deferred to the next update. |
-| [`use-dom-event`](./packages/use-dom-event) | `@usable-react/use-dom-event` | Create event listeners outside the React lifecycle for a given DOM element. |
-| [`use-effect-after-mount`](./packages/use-effect-after-mount) | `@usable-react/use-effect-after-mount` | Just like `useEffect`, but only executes _after_ mounting! |
-| [`use-effect-trigger`](./packages/use-effect-trigger) | `@usable-react/use-effect-trigger` | An effect you can trigger with a function call! |
-| [`use-filter`](./packages/use-filter) | `@usable-react/use-filter` | Perform a fuzzy search on a dataset using [`fuse.js`](https://github.com/krisk/fuse). |
-| [`use-force-update`](./packages/use-force-update) | `@usable-react/use-force-update` | Force a component to re-render. |
-| [`use-hash`](./packages/use-hash) | `@usable-react/use-hash` | Get the MD5 hash of an arbitrary object (based on [`object-hash`](https://github.com/puleos/object-hash)). |
-| [`use-hash-compare`](./packages/use-hash-compare) | `@usable-react/use-hash-compare` | Just like `useCompare`, but using the value's MD5 hash. |
-| [`use-initial-render`](./packages/use-initial-render) | `@usable-react/use-initial-render` | Just like `useEffect`, but only executes on a component's initial render. |
-| [`use-interval`](./packages/use-interval) | `@usable-react/use-interval` | Execute an effect on an interval (with automatic cleanup). |
-| [`use-previous`](./packages/use-previous) | `@usable-react/use-previous` | Returns the previous value of the given source. |
-| [`use-timer`](./packages/use-timer) | `@usable-react/use-timer` | Contains several hooks to easily create timers within the React lifecycle. |
+| [`usable-react`](./packages/usable-react) | A package containing all the hooks! |
+| [`@usable-react/use-compare`](./packages/use-compare) | Check if a value has changed since the last render. |
+| [`@usable-react/use-debounced`](./packages/use-debounced) | Debounce an incoming change to the given value. |
+| [`@usable-react/use-deferred-children`](./packages/use-deferred-children) | Get a copy of the given React `children`, deferred to the next update. |
+| [`@usable-react/use-dom-event`](./packages/use-dom-event) | Create event listeners outside the React lifecycle for a given DOM element. |
+| [`@usable-react/use-effect-after-mount`](./packages/use-effect-after-mount) | Just like `useEffect`, but only executes _after_ mounting! |
+| [`@usable-react/use-effect-trigger`](./packages/use-effect-trigger) | An effect you can trigger with a function call! |
+| [`@usable-react/use-filter`](./packages/use-filter) | Perform a fuzzy search on a dataset using [`fuse.js`](https://github.com/krisk/fuse). |
+| [`@usable-react/use-force-update`](./packages/use-force-update) | Force a component to re-render. |
+| [`@usable-react/use-hash`](./packages/use-hash) | Get the MD5 hash of an arbitrary object (based on [`object-hash`](https://github.com/puleos/object-hash)). |
+| [`@usable-react/use-hash-compare`](./packages/use-hash-compare) | Just like `useCompare`, but using the value's MD5 hash. |
+| [`@usable-react/use-initial-render`](./packages/use-initial-render) | Just like `useEffect`, but only executes on a component's initial render. |
+| [`@usable-react/use-interval`](./packages/use-interval) | Execute an effect on an interval (with automatic cleanup). |
+| [`@usable-react/use-previous`](./packages/use-previous) | Returns the previous value of the given source. |
+| [`@usable-react/use-timer`](./packages/use-timer) | Contains several hooks to easily create timers within the React lifecycle. |
 
 ## Contributing
 
