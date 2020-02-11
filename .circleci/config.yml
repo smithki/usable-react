@@ -333,6 +333,7 @@ workflows:
       - create-release:
           requires:
             - confirm-release
+            - lint
 
       - tag-release:
           requires:
@@ -366,6 +367,7 @@ workflows:
           requires:
             - build
             - test
+            - lint
 
       - tag-release:
           requires:
