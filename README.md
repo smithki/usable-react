@@ -81,5 +81,5 @@ As aforementioned, this project is still taking shape :baby: More formal contrib
 | `lint` | `PKG=$PACKAGE_TARGET yarn lint` | Run the linter for the specified package, or all packages if `$PKG` is omitted. |
 | `test` | `PKG=$PACKAGE_TARGET yarn test` | Run tests for the specified package, or all packages if `$PKG` is omitted. |
 | `release` | `yarn release` | Publishes all packages with unreleased versions. |
-| `release` | `yarn release_canary` | Publishes all packages with unreleased versions. |
+| `release_canary` | `yarn release_canary` | Publishes pre-release versions for all packages. |
 
