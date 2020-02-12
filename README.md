@@ -65,7 +65,7 @@ npm install @usable-react/use-force-update
     2. `yarn bootstrap`
     3. `PKG=$PACKAGE_TARGET yarn dev`
 3. Make your changes! Commit early and often and [write good commit messages](https://chris.beams.io/posts/git-commit/).
-4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably @smithki) can review the code and merge your changes!
+4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably [@smithki](https://github.com/smithki)) can review the code and merge your changes!
 
 As aforementioned, this project is still taking shape :baby: More formal contributor processes will undoubtedly be added over time according to the project's needs!
 
