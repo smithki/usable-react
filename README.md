@@ -53,7 +53,7 @@ npm install @usable-react/use-force-update
 
 ## Contributing
 
-`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! I care deeply about building tools that foster more creative approachable front-end development! Here are some steps to open a PR:
+`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! Here are some steps to open a PR:
 
 1. Fork it!
 2. Create a branch based off `development` named with a package directory (or directories), leading label, and a descriptive title:
