@@ -53,7 +53,7 @@ npm install @usable-react/use-force-update
 
 ## Contributing
 
-`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! I care deeply about building tools that foster more creative approachable front-end development! Here are some steps to open a PR:
+`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! Here are some steps to open a PR:
 
 1. Fork it!
 2. Create a branch based off `development` named with a package directory (or directories), leading label, and a descriptive title:
@@ -65,7 +65,7 @@ npm install @usable-react/use-force-update
     2. `yarn bootstrap`
     3. `PKG=$PACKAGE_TARGET yarn dev`
 3. Make your changes! Commit early and often and [write good commit messages](https://chris.beams.io/posts/git-commit/).
-4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably @smithki) can review the code and merge your changes!
+4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably [@smithki](https://github.com/smithki)) can review the code and merge your changes!
 
 As aforementioned, this project is still taking shape :baby: More formal contributor processes will undoubtedly be added over time according to the project's needs!
 
@@ -81,5 +81,5 @@ As aforementioned, this project is still taking shape :baby: More formal contrib
 | `lint` | `PKG=$PACKAGE_TARGET yarn lint` | Run the linter for the specified package, or all packages if `$PKG` is omitted. |
 | `test` | `PKG=$PACKAGE_TARGET yarn test` | Run tests for the specified package, or all packages if `$PKG` is omitted. |
 | `release` | `yarn release` | Publishes all packages with unreleased versions. |
-| `release` | `yarn release_canary` | Publishes all packages with unreleased versions. |
+| `release_canary` | `yarn release_canary` | Publishes pre-release versions for all packages. |
 
