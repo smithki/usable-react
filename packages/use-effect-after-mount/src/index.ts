@@ -2,8 +2,8 @@ import { EffectCallback, useEffect, useRef } from 'react';
 import { useInitialRender } from '@usable-react/use-initial-render';
 
 /**
- * Exactly like `useEffect` except that the effect only executes on subsequent
- * updates after mounting.
+ * Exactly like `useEffect`, except that the effect only executes on subsequent
+ * updates after a component mounts.
  */
 export function useEffectAfterMount(effect: EffectCallback, deps?: readonly any[]) {
   const isInitialRender = useInitialRender();

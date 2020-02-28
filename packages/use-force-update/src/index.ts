@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
 
 /**
- * Returns a function that forces a local component re-render when invoked.
+ * Returns a memoized function that forces a local component re-render when
+ * invoked.
  */
 export function useForceUpdate() {
   const [trigger, setTrigger] = useState(0);
