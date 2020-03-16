@@ -6,16 +6,31 @@ import { useTimer, useTimerComplete } from '@usable-react/use-timer';
 import { useEffectTrigger } from '../../usable-react/src';
 
 interface UseFilterOptions<TData> {
+  /**
+   * The search term that will be used to query the `haystack`.
+   */
   needle?: string;
+
+  /**
+   * The data to search.
+   */
   haystack?: TData[];
+
+  /**
+   * Debounces the (perhaps costly) fuzzy search operation. Use this option if
+   * performance is a concern.
+   */
   debounce?: number;
-  /* Fuse.js options -> see https://fusejs.io/ */
+
+  /**
+   * Fuse.js options -> see https://fusejs.io/
+   */
   searchOptions?: Fuse.FuseOptions<TData>;
 }
 
 /**
  * Peform a fuzzy search on a dataset (`haystack`), returning the results that
- * match most closely to the given `needle`
+ * match most closely to the given `needle`.
  */
 export function useFilter<TData = any>({ needle, haystack, debounce, searchOptions }: UseFilterOptions<TData> = {}) {
   const [results, setResults] = useState<TData[]>([]);

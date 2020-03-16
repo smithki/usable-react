@@ -25,8 +25,10 @@ export type UseDomEventAddListenerFunction<T extends HTMLElement | Window | Docu
   : never;
 
 /**
- * Returns a `boolean` indicating whether the given `value` has changed since
- * the previous update.
+ * Creates a React hook that registers DOM event listeners on the given
+ * `element`. The effect returns a `void` function that can be used to remove
+ * the event listener manually. Event listeners created this way are
+ * automatically cleaned up before the component unmounts.
  */
 export function useDomEvent<T extends HTMLElement | Window | Document>(
   element: T | MutableRefObject<T> | RefObject<T>,

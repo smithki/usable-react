@@ -86,6 +86,7 @@ aliases: [
     "packages/use-interval/node_modules",
     "packages/use-previous/node_modules",
     "packages/use-timer/node_modules",
+    "packages/use-click-outside/node_modules",
   ],
 
   # List of build output paths that should be persisted to the
@@ -106,6 +107,7 @@ aliases: [
     "packages/use-interval/dist",
     "packages/use-previous/dist",
     "packages/use-timer/dist",
+    "packages/use-click-outside/dist",
   ],
 
   # Yarn lockfile cache key (update "vN" => "vN+1" to cache-bust).
@@ -333,6 +335,7 @@ workflows:
       - create-release:
           requires:
             - confirm-release
+            - lint
 
       - tag-release:
           requires:
@@ -366,6 +369,7 @@ workflows:
           requires:
             - build
             - test
+            - lint
 
       - tag-release:
           requires:

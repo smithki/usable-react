@@ -2,7 +2,7 @@ import { EffectCallback, useCallback, useEffect, useRef, useState } from 'react'
 import { useCompare } from '@usable-react/use-compare';
 
 /**
- * Exactly like `useEffect` except that it returns a memoized function to
+ * Exactly like `useEffect`, except that it returns a memoized function to
  * trigger the effect in question. The effect only executes when the trigger
  * updates regardless of the given `deps`.
  *

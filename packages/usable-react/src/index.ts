@@ -12,3 +12,4 @@ export * from '@usable-react/use-hash-compare';
 export * from '@usable-react/use-effect-after-mount';
 export * from '@usable-react/use-interval';
 export * from '@usable-react/use-timer';
+export * from '@usable-react/use-click-outside';

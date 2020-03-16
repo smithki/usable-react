@@ -1,6 +1,6 @@
 {
   "name": "usable-react",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -28,19 +28,20 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-compare": "^0.5.4",
-    "@usable-react/use-debounced": "^0.5.4",
-    "@usable-react/use-deferred-children": "^0.5.4",
-    "@usable-react/use-dom-event": "^0.5.4",
-    "@usable-react/use-effect-after-mount": "^0.5.4",
-    "@usable-react/use-effect-trigger": "^0.5.4",
-    "@usable-react/use-filter": "^0.5.4",
-    "@usable-react/use-force-update": "^0.5.4",
-    "@usable-react/use-hash": "^0.5.4",
-    "@usable-react/use-hash-compare": "^0.5.4",
-    "@usable-react/use-initial-render": "^0.5.4",
-    "@usable-react/use-interval": "^0.5.4",
-    "@usable-react/use-previous": "^0.5.4",
-    "@usable-react/use-timer": "^0.5.4"
+    "@usable-react/use-compare": "^0.6.0",
+    "@usable-react/use-debounced": "^0.6.0",
+    "@usable-react/use-deferred-children": "^0.6.0",
+    "@usable-react/use-dom-event": "^0.6.0",
+    "@usable-react/use-effect-after-mount": "^0.6.0",
+    "@usable-react/use-effect-trigger": "^0.6.0",
+    "@usable-react/use-filter": "^0.6.0",
+    "@usable-react/use-force-update": "^0.6.0",
+    "@usable-react/use-hash": "^0.6.0",
+    "@usable-react/use-hash-compare": "^0.6.0",
+    "@usable-react/use-initial-render": "^0.6.0",
+    "@usable-react/use-interval": "^0.6.0",
+    "@usable-react/use-previous": "^0.6.0",
+    "@usable-react/use-timer": "^0.6.0",
+    "@usable-react/use-click-outside": "^0.6.0"
   }
 }

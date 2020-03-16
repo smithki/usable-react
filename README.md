@@ -33,27 +33,28 @@ npm install @usable-react/use-force-update
 
 `usable-react` is managed as a monorepo so that hooks can be used collectively, or optimized as separate dependencies.
 
-| Package directory | Package Name | Description |
-| ----------------- | ------------ | ----------- |
-| [`usable-react`](./packages/usable-react) | `usable-react` | A package containing all the hooks! |
-| [`use-compare`](./packages/use-compare) | `@usable-react/use-compare` | Description coming soon! |
-| [`use-debounced`](./packages/use-debounced) | `@usable-react/use-debounced` | Description coming soon! |
-| [`use-deferred-children`](./packages/use-deferred-children) | `@usable-react/use-deferred-children` | Description coming soon! |
-| [`use-dom-event`](./packages/use-dom-event) | `@usable-react/use-dom-event` | Description coming soon! |
-| [`use-effect-after-mount`](./packages/use-effect-after-mount) | `@usable-react/use-effect-after-mount` | Description coming soon! |
-| [`use-effect-trigger`](./packages/use-effect-trigger) | `@usable-react/use-effect-trigger` | Description coming soon! |
-| [`use-filter`](./packages/use-filter) | `@usable-react/use-filter` | Description coming soon! |
-| [`use-force-update`](./packages/use-force-update) | `@usable-react/use-force-update` | Description coming soon! |
-| [`use-hash`](./packages/use-hash) | `@usable-react/use-hash` | Description coming soon! |
-| [`use-hash-compare`](./packages/use-hash-compare) | `@usable-react/use-hash-compare` | Description coming soon! |
-| [`use-initial-render`](./packages/use-initial-render) | `@usable-react/use-initial-render` | Description coming soon! |
-| [`use-interval`](./packages/use-interval) | `@usable-react/use-interval` | Description coming soon! |
-| [`use-previous`](./packages/use-previous) | `@usable-react/use-previous` | Description coming soon! |
-| [`use-timer`](./packages/use-timer) | `@usable-react/use-timer` | Description coming soon! |
+| Package Name | Description |
+| ------------ | ----------- |
+| [`usable-react`](./packages/usable-react) | A package containing all the hooks! |
+| [`@usable-react/use-compare`](./packages/use-compare) | Check if a value has changed since the last render. |
+| [`@usable-react/use-debounced`](./packages/use-debounced) | Debounce an incoming change to the given value. |
+| [`@usable-react/use-deferred-children`](./packages/use-deferred-children) | Get a copy of the given React `children`, deferred to the next update. |
+| [`@usable-react/use-dom-event`](./packages/use-dom-event) | Create event listeners outside the React lifecycle for a given DOM element. |
+| [`@usable-react/use-effect-after-mount`](./packages/use-effect-after-mount) | Just like `useEffect`, but only executes _after_ mounting! |
+| [`@usable-react/use-effect-trigger`](./packages/use-effect-trigger) | An effect you can trigger with a function call! |
+| [`@usable-react/use-filter`](./packages/use-filter) | Perform a fuzzy search on a dataset using [`fuse.js`](https://github.com/krisk/fuse). |
+| [`@usable-react/use-force-update`](./packages/use-force-update) | Force a component to re-render. |
+| [`@usable-react/use-hash`](./packages/use-hash) | Get the MD5 hash of an arbitrary object (based on [`object-hash`](https://github.com/puleos/object-hash)). |
+| [`@usable-react/use-hash-compare`](./packages/use-hash-compare) | Just like `useCompare`, but using the value's MD5 hash. |
+| [`@usable-react/use-initial-render`](./packages/use-initial-render) | Just like `useEffect`, but only executes on a component's initial render. |
+| [`@usable-react/use-interval`](./packages/use-interval) | Execute an effect on an interval (with automatic cleanup). |
+| [`@usable-react/use-previous`](./packages/use-previous) | Returns the previous value of the given source. |
+| [`@usable-react/use-timer`](./packages/use-timer) | Contains several hooks to easily create timers within the React lifecycle. |
+| [`@usable-react/use-click-outside`](./packages/use-click-outside) | Detect click events that occur outside the supplied elements. |
 
 ## Contributing
 
-`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! We care deeply about building tools that foster a more creative, approachable development cycle to the decentralized application space—but we need the community's help to get there! Here are some steps to open a PR:
+`usable-react` is at an early stage of development, so contributing is a great way to both move the project forward and have your ideas represented! Here are some steps to open a PR:
 
 1. Fork it!
 2. Create a branch based off `development` named with a package directory (or directories), leading label, and a descriptive title:
@@ -65,9 +66,9 @@ npm install @usable-react/use-force-update
     2. `yarn bootstrap`
     3. `PKG=$PACKAGE_TARGET yarn dev`
 3. Make your changes! Commit early and often and [write good commit messages](https://chris.beams.io/posts/git-commit/).
-4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor can review the code and merge your changes!
+4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably [@smithki](https://github.com/smithki)) can review the code and merge your changes!
 
-As aforementioned, this project is still taking shape :baby: More formal contributor processes will undoubtedly be added over time according to the project's (and community's) wants or needs!
+As aforementioned, this project is still taking shape :baby: More formal contributor processes will undoubtedly be added over time according to the project's needs!
 
 ## Development Scripts
 
@@ -77,9 +78,9 @@ As aforementioned, this project is still taking shape :baby: More formal contrib
 | `exec` | `PKG=$PACKAGE_TARGET yarn exec -- ...` | Execute commands in the specified package. |
 | `dev` | `PKG=$PACKAGE_TARGET yarn dev` | Start the specified package in development mode, or all packages if `$PKG` is omitted. |
 | `build` | `PKG=$PACKAGE_TARGET yarn build` | Build the specified package for production, or all packages if `$PKG` is omitted. |
-| `clean` | `PKG=$PACKAGE_TARGET yarn clean` | Run cleaning scripts for the specified package (NOTE: removes `node_modules`), or all packages if `$PKG` is omitted. |
+| `clean` | `PKG=$PACKAGE_TARGET yarn clean` | Run cleaning scripts for the specified package, or all packages if `$PKG` is omitted. |
 | `lint` | `PKG=$PACKAGE_TARGET yarn lint` | Run the linter for the specified package, or all packages if `$PKG` is omitted. |
 | `test` | `PKG=$PACKAGE_TARGET yarn test` | Run tests for the specified package, or all packages if `$PKG` is omitted. |
 | `release` | `yarn release` | Publishes all packages with unreleased versions. |
-| `release` | `yarn release_canary` | Publishes all packages with unreleased versions. |
+| `release_canary` | `yarn release_canary` | Publishes pre-release versions for all packages. |
 
