@@ -41,6 +41,7 @@
     "@usable-react/use-initial-render": "^0.6.0",
     "@usable-react/use-interval": "^0.6.0",
     "@usable-react/use-previous": "^0.6.0",
-    "@usable-react/use-timer": "^0.6.0"
+    "@usable-react/use-timer": "^0.6.0",
+    "@usable-react/use-click-outside": "^0.6.0"
   }
 }
