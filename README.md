@@ -50,6 +50,7 @@ npm install @usable-react/use-force-update
 | [`@usable-react/use-interval`](./packages/use-interval) | Execute an effect on an interval (with automatic cleanup). |
 | [`@usable-react/use-previous`](./packages/use-previous) | Returns the previous value of the given source. |
 | [`@usable-react/use-timer`](./packages/use-timer) | Contains several hooks to easily create timers within the React lifecycle. |
+| [`@usable-react/use-click-outside`](./packages/use-click-outside) | Detect click events that occur outside the supplied elements. |
 
 ## Contributing
 
