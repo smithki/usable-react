@@ -1,5 +1,5 @@
 {
-  "name": "@usable-react/use-filter",
+  "name": "@usable-react/use-is-mounted",
   "version": "0.6.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
@@ -13,7 +13,7 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.m.js",
-  "types": "dist/use-filter/src/index.d.ts",
+  "types": "dist/use-is-mounted/src/index.d.ts",
   "scripts": {
     "dev": "microbundle watch src/index.ts --format es,cjs --target web --external react",
     "build": "microbundle build src/index.ts  --format es,cjs --target web --external react",
@@ -24,12 +24,5 @@
   },
   "peerDependencies": {
     "react": "^16.11.0"
-  },
-  "dependencies": {
-    "@usable-react/use-compare": "^0.6.0",
-    "@usable-react/use-hash": "^0.6.0",
-    "@usable-react/use-timer": "^0.6.0",
-    "@usable-react/use-effect-trigger": "^0.6.0",
-    "fuse.js": "3.4.6"
   }
 }
