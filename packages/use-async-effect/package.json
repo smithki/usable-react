@@ -1,5 +1,5 @@
 {
-  "name": "@usable-react/use-effect-trigger",
+  "name": "@usable-react/use-async-effect",
   "version": "0.7.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
@@ -13,7 +13,7 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.m.js",
-  "types": "dist/use-effect-trigger/src/index.d.ts",
+  "types": "dist/use-async-effect/src/index.d.ts",
   "scripts": {
     "dev": "microbundle watch src/index.ts --format es,cjs --target web --external react",
     "build": "microbundle build src/index.ts  --format es,cjs --target web --external react",
@@ -26,6 +26,6 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-compare": "^0.7.0"
+    "@usable-react/use-is-mounted": "^0.7.0"
   }
 }

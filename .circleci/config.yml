@@ -87,6 +87,8 @@ aliases: [
     "packages/use-previous/node_modules",
     "packages/use-timer/node_modules",
     "packages/use-click-outside/node_modules",
+    "packages/use-async-effect/node_modules",
+    "packages/use-is-mounted/node_modules",
   ],
 
   # List of build output paths that should be persisted to the
@@ -108,6 +110,8 @@ aliases: [
     "packages/use-previous/dist",
     "packages/use-timer/dist",
     "packages/use-click-outside/dist",
+    "packages/use-async-effect/dist",
+    "packages/use-is-mounted/dist",
   ],
 
   # Yarn lockfile cache key (update "vN" => "vN+1" to cache-bust).
@@ -189,7 +193,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Lint source files
-          command: npx lerna run lint
+          command: npx lerna run lint --concurrency 2
 
   # Builds modules and persists the build output to the workspace.
   build:
@@ -199,7 +203,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Build modules
-          command: npx lerna run build
+          command: npx lerna run build --concurrency 2
       - persist_to_workspace:
           paths: *build-output-paths
           root: *workspace-root
@@ -212,7 +216,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Run tests
-          command: npx lerna run test
+          command: npx lerna run test --concurrency 2
 
   # Publish the packages to NPM. This should depend on the `build` job.
   create-release:

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCompare } from '@usable-react/use-compare';
 import { useHash } from '@usable-react/use-hash';
 import { useTimer, useTimerComplete } from '@usable-react/use-timer';
-import { useEffectTrigger } from '../../usable-react/src';
+import { useEffectTrigger } from '@usable-react/use-effect-trigger';
 
 interface UseFilterOptions<TData> {
   /**

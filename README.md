@@ -51,6 +51,8 @@ npm install @usable-react/use-force-update
 | [`@usable-react/use-previous`](./packages/use-previous) | Returns the previous value of the given source. |
 | [`@usable-react/use-timer`](./packages/use-timer) | Contains several hooks to easily create timers within the React lifecycle. |
 | [`@usable-react/use-click-outside`](./packages/use-click-outside) | Detect click events that occur outside the supplied elements. |
+| [`@usable-react/use-async-effect`](./packages/use-async-effect) | Simplify asynchronous behavior in side effects. |
+| [`@usable-react/use-is-mounted`](./packages/use-is-mounted) | Detect if the local component is currently mounted. Useful for gating asynchronous `setState` logic. |
 
 ## Contributing
 
