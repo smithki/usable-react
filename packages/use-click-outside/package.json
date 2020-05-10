@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-click-outside",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-dom-event": "^0.6.0",
-    "@usable-react/use-effect-trigger": "^0.6.0"
+    "@usable-react/use-dom-event": "^0.7.0",
+    "@usable-react/use-effect-trigger": "^0.7.0"
   }
 }
