@@ -8,9 +8,6 @@
     "clean": "./scripts/clean.sh",
     "lint": "./scripts/lint.sh",
     "test": "echo \"No tests to run!\"",
-    "patch": "lerna version patch --no-git-tag-version",
-    "minor": "lerna version minor --no-git-tag-version",
-    "major": "lerna version major--no-git-tag-version",
     "release": "lerna publish from-package --yes",
     "release_canary": "lerna publish from-package --canary --yes"
   },
@@ -23,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "alsatian": "^2.4.0",
     "atob": "^2.1.2",
+    "auto": "^9.60.1",
     "btoa": "^1.2.1",
     "eslint": "^6.7.2",
     "eslint-import-resolver-typescript": "^2.0.0",
@@ -41,5 +39,12 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "repository": "smithki/usable-react",
+  "author": "Ian K Smith <hello@iks.codes>",
+  "auto": {
+    "plugins": [
+      "npm"
+    ]
+  }
 }
