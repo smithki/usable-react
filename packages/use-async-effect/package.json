@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-async-effect",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,6 +26,6 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-is-mounted": "^0.7.1"
+    "@usable-react/use-is-mounted": "^0.8.0"
   }
 }
