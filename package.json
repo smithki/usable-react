@@ -1,5 +1,7 @@
 {
   "private": true,
+  "author": "Ian K Smith <hello@iks.codes>",
+  "repository": "smithki/usable-react",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "exec": "lerna exec --scope $PKG -- $@",
@@ -7,9 +9,7 @@
     "build": "./scripts/clean.sh && ./scripts/build.sh",
     "clean": "./scripts/clean.sh",
     "lint": "./scripts/lint.sh",
-    "test": "echo \"No tests to run!\"",
-    "release": "lerna publish from-package --yes",
-    "release_canary": "lerna publish from-package --canary --yes"
+    "test": "echo \"No tests to run!\""
   },
   "devDependencies": {
     "@ikscodes/eslint-config": "^6.2.0",
@@ -38,11 +38,14 @@
     "rimraf": "^2.6.1",
     "typescript": "^3.0.3"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents"
+    }
+  },
   "workspaces": [
     "packages/*"
   ],
-  "repository": "smithki/usable-react",
-  "author": "Ian K Smith <hello@iks.codes>",
   "auto": {
     "plugins": [
       "npm"
