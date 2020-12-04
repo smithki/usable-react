@@ -44,8 +44,7 @@ export interface TimerHook {
  * @param tick - The interval at which to update the timer (in milliseconds).
  */
 export function useTimer(options: { length: number; tick?: number; autoStart?: boolean }): TimerHook {
-  const optionsWithDefaults = { ...{ tick: 1000, autoStart: false }, ...options };
-  const { length, tick, autoStart } = optionsWithDefaults;
+  const { length, tick = 1000, autoStart = false } = options;
 
   const [remaining, setRemaining] = useState(length);
   const [isRunning, setIsRunning] = useState(autoStart);
