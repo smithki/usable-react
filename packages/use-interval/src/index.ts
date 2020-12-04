@@ -1,4 +1,4 @@
-import { EffectCallback, useEffect, useRef } from 'react';
+import { EffectCallback, useCallback, useEffect, useRef } from 'react';
 import { useEffectTrigger } from '@usable-react/use-effect-trigger';
 import { useInitialRender } from '@usable-react/use-initial-render';
 
@@ -28,9 +28,9 @@ export function useInterval(effect: EffectCallback, deps: readonly any[], interv
     return () => clearTimeout(id);
   }, [triggerInterval, interval]);
 
-  const clear = () => {
+  const clear = useCallback(() => {
     isCleared.current = true;
-  };
+  }, []);
 
   return clear;
 }
