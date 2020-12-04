@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-previous",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",

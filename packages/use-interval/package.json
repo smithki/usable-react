@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-interval",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-effect-trigger": "^0.9.0",
-    "@usable-react/use-initial-render": "^0.9.0"
+    "@usable-react/use-effect-trigger": "^1.0.0",
+    "@usable-react/use-initial-render": "^1.0.0"
   }
 }
