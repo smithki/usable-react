@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useReducer } from 'react';
 
 /**
  * Returns a memoized function that forces a local component re-render when
  * invoked.
  */
 export function useForceUpdate() {
-  const [trigger, setTrigger] = useState(0);
-  return useCallback(() => setTrigger(trigger + 1), [trigger]);
+  const [_, forceUpdate] = useReducer((x: number) => x + 1, 0);
+  return forceUpdate;
 }
