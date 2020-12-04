@@ -30,5 +30,5 @@ export function useEffectTrigger(effect: EffectCallback, deps: readonly any[] = 
     return undefined;
   }, [i, ...deps]);
 
-  return trigger;
+  return trigger as () => void;
 }

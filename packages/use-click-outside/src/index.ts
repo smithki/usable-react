@@ -13,7 +13,7 @@ export function useClickOutside(
   const triggerClickOutside = useEffectTrigger(effect, deps);
 
   const addWindowListener = useDomEvent(window);
-  addWindowListener('click', e => {
-    if (elList.every(el => !!el && !el.contains(e.target as any))) triggerClickOutside();
+  addWindowListener('click', (e) => {
+    if (elList.every((el) => !!el && !el.contains(e.target as any))) triggerClickOutside();
   });
 }
