@@ -1,6 +1,6 @@
 {
   "name": "@usable-react/use-hash-compare",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "react": "^16.11.0"
   },
   "dependencies": {
-    "@usable-react/use-compare": "^0.8.0",
-    "@usable-react/use-hash": "^0.8.0"
+    "@usable-react/use-compare": "^0.9.0",
+    "@usable-react/use-hash": "^0.9.0"
   }
 }
