@@ -6,29 +6,26 @@ Please note we have a **code of conduct**, please follow it in all your interact
 
 ## Setting up for Local Development
 
-1. Fork this repostiory.
-2. Clone your fork.
-3. Create a new branch in your local repository with the following pattern:
-
-- For bug fixes: `bug/[package_name]/[issue_number]/[descriptive_bug_name]`
-- For features: `feature/[package_name]/[issue_number]/[descriptive_feature_name]`
-- For chores/the rest: `chore/[package_name]/[descriptive_chore_name]`
-
-4. Install & hoist dependencies with Yarn + Lerna: `yarn bootstrap`
-5. Add `./node_modules/.bin` to your system's [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)), if it's not already listed.
-6. Build your target package for development: `PKG=$PACKAGE_TARGET yarn dev`
+1. Fork it!
+2. Create a branch based off `master` named with a package directory (or directories), leading label, and a descriptive title:
+    - `{hook}/{label}/{descriptive title}`
+    - For features: `use-hash/feature/my-brand-spankin-new-thing`
+    - For bug fixes: `use-timer/fix/my-bug-fix`
+3. Set up your local development environment:
+    1. `yarn install`
+    3. `PKG=$PACKAGE_TARGET yarn dev`
+3. Make your changes! Commit early and often and [write good commit messages](https://chris.beams.io/posts/git-commit/).
+4. Open a [draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests/) so that a core contributor (probably [@smithki](https://github.com/smithki)) can review the code and merge your changes!
 
 ### Development Scripts
 
-| NPM Script | Usage | Description |
-| ---------- | ----- | ----------- |
-| `bootstrap` | `yarn bootstrap` | Install dependencies/set up a local development environment. |
-| `exec` | `PKG=$PACKAGE_TARGET yarn exec -- ...` | Execute commands in the specified package. |
-| `dev` | `PKG=$PACKAGE_TARGET yarn build` | Build the specified package for development, specifying `$PKG` is _required_. |
-| `build` | `PKG=$PACKAGE_TARGET yarn build` | Build the specified package for production, or all packages if `$PKG` is omitted. |
-| `clean` | `PKG=$PACKAGE_TARGET yarn clean` | Run cleaning scripts for the specified package, or all packages if `$PKG` is omitted. Flags: (`-c, --cache`: Clean up cache directories instead) |
-| `lint` | `PKG=$PACKAGE_TARGET yarn lint` | Run the linter for the specified package, or all packages if `$PKG` is omitted. |
-| `test` | `PKG=$PACKAGE_TARGET yarn test` | Run tests for the specified package, or all packages if `$PKG` is omitted. |
+| NPM Script | Description |
+| ---------- | ----------- |
+| `dev`      | Build `usable-react` for development. |
+| `build`    | Build `usable-react` for production. |
+| `clean`    | Run cleaning scripts. Flags: (`-c, --cache`: Clean up cache directories instead) |
+| `lint`     | Run the linter. |
+| `test`     | Run unit tests. |
 
 ## Opening a Pull Request
 
