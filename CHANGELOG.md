@@ -1,3 +1,15 @@
+# v2.0.1 (Thu Jan 21 2021)
+
+#### ⚠️ Pushed to `master`
+
+- Mark as side-effect-free ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.0.0 (Thu Jan 21 2021)
 
 #### 💥 Breaking Change
