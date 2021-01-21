@@ -1,3 +1,15 @@
+# v2.0.0 (Thu Jan 21 2021)
+
+#### 💥 Breaking Change
+
+- Simplify usable-react as one, side-effect-free package [#28](https://github.com/smithki/usable-react/pull/28) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v1.0.0 (Fri Dec 04 2020)
 
 #### 💥 Breaking Change
