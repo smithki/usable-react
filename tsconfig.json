@@ -12,13 +12,9 @@
     "downlevelIteration": true,
     "target": "es5",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist/es",
     "declaration": true,
   },
-  "include": [
-    "packages/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
 }

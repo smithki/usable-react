@@ -1,29 +1,42 @@
 {
-  "private": true,
+  "name": "usable-react",
+  "version": "1.0.0",
+  "description": "Basic React hooks to get any project off the ground.",
   "author": "Ian K Smith <hello@iks.codes>",
-  "repository": "smithki/usable-react",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smithki/usable-react"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/es/index.d.ts",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "exec": "lerna exec --scope $PKG -- $@",
-    "dev": "./scripts/clean.sh && ./scripts/dev.sh",
-    "build": "./scripts/clean.sh && ./scripts/build.sh",
-    "clean": "./scripts/clean.sh",
-    "lint": "./scripts/lint.sh",
-    "test": "echo \"No tests to run!\""
+    "dev": "tsc -w --project tsconfig.json",
+    "build": "tsc --project tsconfig.json && tsc --project tsconfig.cjs.json",
+    "lint": "eslint --fix src/**/*.ts",
+    "clean": "rimraf dist",
+    "test": "echo \"No tests to run!\"",
+    "test:tree-shaking": "yarn build && agadoo"
+  },
+  "peerDependencies": {
+    "react": "^16.11.0 || ^17.0.0"
+  },
+  "dependencies": {
+    "fuse.js": "^6.4.6"
   },
   "devDependencies": {
     "@ikscodes/eslint-config": "^7.0.2",
     "@ikscodes/prettier-config": "~2.0.1",
-    "@octokit/core": "^3.0.0",
     "@types/node": "^12.11.5",
-    "@types/object-hash": "^1.3.1",
     "@types/react": "^16.9.9",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
-    "alsatian": "^2.4.0",
-    "atob": "^2.1.2",
+    "agadoo": "^2.0.0",
     "auto": "^9.60.1",
-    "btoa": "^1.2.1",
     "eslint": "^7.14.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
@@ -31,28 +44,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^4.3.0",
-    "lerna": "^3.22.1",
-    "lint-staged": "^10.4.2",
-    "microbundle": "next",
-    "mock-browser": "^0.92.14",
-    "npm-run-all": "^4.1.5",
     "prettier": "^2.2.0",
-    "react": "^16.11.0",
+    "react": "^17.0.1",
     "rimraf": "^2.6.1",
     "typescript": "^4.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lerna run --concurrency 1 --stream lint-staged --since HEAD --exclude-dependents"
-    }
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "auto": {
-    "plugins": [
-      "npm"
-    ]
   }
 }

@@ -6,52 +6,17 @@ aliases: [
   # List of dependency paths that should be persisted to the
   # CircleCI workspace.
   &dependency-paths [
-    "node_modules",
-    "packages/usable-react/node_modules",
-    "packages/use-compare/node_modules",
-    "packages/use-debounced/node_modules",
-    "packages/use-deferred-children/node_modules",
-    "packages/use-dom-event/node_modules",
-    "packages/use-effect-after-mount/node_modules",
-    "packages/use-effect-trigger/node_modules",
-    "packages/use-filter/node_modules",
-    "packages/use-force-update/node_modules",
-    "packages/use-hash/node_modules",
-    "packages/use-hash-compare/node_modules",
-    "packages/use-initial-render/node_modules",
-    "packages/use-interval/node_modules",
-    "packages/use-previous/node_modules",
-    "packages/use-timer/node_modules",
-    "packages/use-click-outside/node_modules",
-    "packages/use-async-effect/node_modules",
-    "packages/use-is-mounted/node_modules",
+    "node_modules"
   ],
 
   # List of build output paths that should be persisted to the
   # CircleCI workspace.
   &build-output-paths [
-    "packages/usable-react/dist",
-    "packages/use-compare/dist",
-    "packages/use-debounced/dist",
-    "packages/use-deferred-children/dist",
-    "packages/use-dom-event/dist",
-    "packages/use-effect-after-mount/dist",
-    "packages/use-effect-trigger/dist",
-    "packages/use-filter/dist",
-    "packages/use-force-update/dist",
-    "packages/use-hash/dist",
-    "packages/use-hash-compare/dist",
-    "packages/use-initial-render/dist",
-    "packages/use-interval/dist",
-    "packages/use-previous/dist",
-    "packages/use-timer/dist",
-    "packages/use-click-outside/dist",
-    "packages/use-async-effect/dist",
-    "packages/use-is-mounted/dist",
+    "dist",
   ],
 
-  # Yarn lockfile cache key (update "vN" => "vN+1" to cache-bust).
-  &dependency-cache-key "v3-dependency-cache-{{ checksum \"yarn.lock\" }}",
+  # NPM lockfile cache key (update "vN" => "vN+1" to cache-bust).
+  &dependency-cache-key "v1-dependency-cache-{{ checksum \"yarn.lock\" }}",
 
   &workspace-root "/home/circleci/project",
 
@@ -70,23 +35,14 @@ aliases: [
     }
   },
 
-  # Filter pull requests in "master" only (production code).
+  # Filter pull requests in "master" or "next" only (production code).
   &filter-release-branches-only {
     filters: {
       branches: {
         only: [
           "master",
-          "next"
+          "next",
         ]
-      }
-    }
-  },
-
-  # Filter pull requests in "next" only (pre-release code).
-  &filter-prerelease-branches-only {
-    filters: {
-      branches: {
-        only: "next"
       }
     }
   },
@@ -102,7 +58,7 @@ executors:
 # --- Job definitions -------------------------------------------------------- #
 
 jobs:
-  # Installs Node dependencies via Yarn, caches them, then persists
+  # Installs Node dependencies via NPM, caches them, then persists
   # to the workspace.
   install-dependencies:
     executor: default
@@ -113,10 +69,7 @@ jobs:
           key: *dependency-cache-key
       - run:
           name: Install Module Dependencies
-          command: yarn install --frozen-lockfile
-      - run:
-          name: Lerna Bootstrap
-          command: yarn lerna bootstrap
+          command: yarn install
       - save_cache:
           paths: *dependency-paths
           key: *dependency-cache-key
@@ -124,7 +77,7 @@ jobs:
           paths: *dependency-paths
           root: *workspace-root
 
-  # Runs the linter against relevant source files.
+  # Runs a linter against relevant source files.
   lint:
     executor: default
     steps:
@@ -132,7 +85,7 @@ jobs:
       - *attach-workspace
       - run:
           name: Lint source files
-          command: yarn lerna run lint --concurrency 2
+          command: yarn run lint
 
   # Builds modules and persists the build output to the workspace.
   build:
@@ -142,22 +95,28 @@ jobs:
       - *attach-workspace
       - run:
           name: Build modules
-          command: yarn lerna run build --concurrency 2
+          command: yarn run build
       - persist_to_workspace:
           paths: *build-output-paths
           root: *workspace-root
 
-  # Run unit/integration/e2e tests.
+  # Run unit tests and builds a coverage report.
   test:
     executor: default
     steps:
       - checkout
       - *attach-workspace
       - run:
-          name: Run tests
-          command: yarn lerna run test --concurrency 2
+          name: Run unit tests
+          command: yarn run test
+      - run:
+          name: Test tree-shaking
+          command: yarn agadoo
+      # For display in CircleCI Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts:
+          path: coverage
 
-  # Publish the packages to NPM. This should depend on the `build` job.
+  # Publish all packages to NPM
   create-release:
     executor: default
     steps:
@@ -170,7 +129,8 @@ jobs:
 # --- Workflow definitions --------------------------------------------------- #
 
 workflows:
-  # Builds modules, verifies code with the linter, and runs unit tests.
+  # Builds modules, verifies code with the linter, runs unit tests, and builds a
+  # coverage report.
   pull-request:
     jobs:
       - install-dependencies: *filter-default-branches
@@ -210,13 +170,11 @@ workflows:
       - confirm-release:
           type: approval
           requires:
-            - build
             - test
             - lint
 
       - create-release:
           requires:
             - confirm-release
-            - build
             - test
             - lint
