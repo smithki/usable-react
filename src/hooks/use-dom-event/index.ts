@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 
 import { MutableRefObject, RefObject, useCallback, useEffect, useRef } from 'react';
-import { isDocument, isElement, isRefObject, isWindow } from './type-guards';
+import { isDocument, isElement, isRefObject, isWindow } from '../../utils/instance-of';
 
 interface AddEventListenerFunction<
   T extends HTMLElement | Window | Document,
@@ -10,7 +10,7 @@ interface AddEventListenerFunction<
   <K extends keyof EventMap>(
     eventName: K,
     listener: (this: T, event: EventMap[K]) => any,
-    dep?: React.DependencyList,
+    deps?: React.DependencyList,
     options?: boolean | AddEventListenerOptions | undefined,
   ): UseDomEventRemoveListenerFunction;
 
@@ -44,10 +44,10 @@ export type UseDomEventAddListenerFunction<T extends HTMLElement | Window | Docu
  * the event listener manually. Event listeners created this way are
  * automatically cleaned up before the component unmounts.
  */
-export function useDomEvent<T extends HTMLElement | Window | Document>(
+export function useDomEvent<T extends HTMLElement | Window | Document | null>(
   element: T | MutableRefObject<T> | RefObject<T>,
 ) {
-  const addListener: UseDomEventAddListenerFunction<T> = ((...eventListenerParams: any[]) => {
+  return ((...eventListenerParams: any[]) => {
     const [eventName, listener, depsOrOptions, optionsOrDeps] = eventListenerParams;
 
     const deps: React.DependencyList = (Array.isArray(depsOrOptions) ? depsOrOptions : optionsOrDeps) || [];
@@ -68,6 +68,10 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
     }, [options]);
 
     useEffect(() => {
+      // Bail out early if `element` is null.
+      if (!element) return undefined;
+
+      // Handle events from an `element` given as a valid node.
       if (isWindow(element) || isDocument(element) || isElement(element)) {
         const listener = (e: any) => savedListener.current(e);
         element.addEventListener(eventName, listener, savedOptions.current);
@@ -77,6 +81,7 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
         return removeListenerRef.current;
       }
 
+      // Handle events from an `element` given as a React ref.
       if (isRefObject<T>(element)) {
         if (!!element.current && isElement(element.current)) {
           const listener = (e: any) => savedListener.current(e);
@@ -92,7 +97,5 @@ export function useDomEvent<T extends HTMLElement | Window | Document>(
     }, [eventName, element, ...deps]);
 
     return useCallback(() => removeListenerRef.current(), []);
-  }) as UseDomEventAddListenerFunction<T>;
-
-  return addListener;
+  }) as UseDomEventAddListenerFunction<NonNullable<T>>;
 }
