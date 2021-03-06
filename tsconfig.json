@@ -12,6 +12,7 @@
     "downlevelIteration": true,
     "target": "es5",
     "sourceMap": true,
+    "rootDir": "./src",
     "outDir": "./dist/es",
     "declaration": true,
   },
