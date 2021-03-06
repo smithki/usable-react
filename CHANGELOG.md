@@ -1,3 +1,15 @@
+# v2.1.0 (Sat Mar 06 2021)
+
+#### 🚀 Enhancement
+
+- Add `useClipboard` hook [#29](https://github.com/smithki/usable-react/pull/29) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.0.1 (Thu Jan 21 2021)
 
 #### ⚠️ Pushed to `master`
