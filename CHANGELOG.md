@@ -1,3 +1,15 @@
+# v2.1.1 (Sat Mar 06 2021)
+
+#### 🐛 Bug Fix
+
+- Add Rollup for building [#30](https://github.com/smithki/usable-react/pull/30) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.1.0 (Sat Mar 06 2021)
 
 #### 🚀 Enhancement
