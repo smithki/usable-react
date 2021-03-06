@@ -12,7 +12,7 @@ export function isRefObject<T>(obj: any): obj is RefObject<T> | MutableRefObject
   return !!obj.current;
 }
 
-export function isElement(obj: any): obj is HTMLElement {
+export function isElement<T extends HTMLElement>(obj: any): obj is T {
   try {
     // Using W3 DOM2 (works for FF, Opera and Chrome)
     return obj instanceof HTMLElement;
