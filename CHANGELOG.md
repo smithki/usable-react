@@ -1,3 +1,15 @@
+# v2.1.2 (Mon Mar 08 2021)
+
+#### ⚠️ Pushed to `master`
+
+- Add type declarations back after switch to Rollup ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.1.1 (Sat Mar 06 2021)
 
 #### 🐛 Bug Fix
