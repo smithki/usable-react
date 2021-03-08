@@ -9,7 +9,7 @@ export function isWindow(obj: any): obj is Window {
 }
 
 export function isRefObject<T>(obj: any): obj is RefObject<T> | MutableRefObject<T> {
-  return !!obj.current;
+  return obj?.hasOwnProperty('current');
 }
 
 export function isElement<T extends HTMLElement>(obj: any): obj is T {
