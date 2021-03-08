@@ -13,7 +13,7 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
-  "types": "dist/es/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "dev": "rollup -w -c rollup.config.js",
