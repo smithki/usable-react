@@ -1,3 +1,16 @@
+# v2.1.3 (Mon Mar 08 2021)
+
+#### ⚠️ Pushed to `master`
+
+- Merge branch 'master' of github.com:smithki/usable-react ([@smithki](https://github.com/smithki))
+- Update 'isRefObject' implementation ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.1.2 (Mon Mar 08 2021)
 
 #### ⚠️ Pushed to `master`
