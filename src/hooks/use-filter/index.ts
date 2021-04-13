@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCompare } from '../use-compare';
 import { useHash } from '../use-hash';
 import { useTimer, useTimerComplete } from '../use-timer';
@@ -36,36 +36,33 @@ export function useFilter<TData = any>({ needle, haystack, debounce, searchOptio
   const [results, setResults] = useState<TData[]>([]);
   const cooldownTimer = useTimer({ length: 0, tick: 100, autoStart: false });
 
-  const optionsWithDefaults: Fuse.IFuseOptions<TData> = useMemo(
-    () => ({
-      keys: [],
-      ...searchOptions,
-    }),
-    [searchOptions],
-  );
+  const options: Fuse.IFuseOptions<TData> = {
+    keys: [],
+    ...searchOptions,
+  };
 
   const haystackHash = useHash(haystack);
-  const optionsHash = useHash(optionsWithDefaults);
+  const optionsHash = useHash(options);
 
   const didNeedleChange = useCompare(needle);
   const didHaystackChange = useCompare(haystackHash);
   const didOptionsChange = useCompare(optionsHash);
 
-  const search = useEffectTrigger(() => {
-    const fuse = new Fuse<TData>(haystack || [], optionsWithDefaults);
+  const triggerSearch = useEffectTrigger(() => {
+    const fuse = new Fuse<TData>(haystack || [], options);
     if (needle) setResults(fuse.search(needle).map((i) => i.item));
   }, [needle, haystackHash, optionsHash, debounce]);
 
   // Execute a search if the needle/haystack changes.
   useEffect(() => {
-    if (!cooldownTimer.isRunning && (didNeedleChange || didHaystackChange || didOptionsChange)) {
+    if (!cooldownTimer.isRunning() && (didNeedleChange || didHaystackChange || didOptionsChange)) {
       cooldownTimer.reset(debounce);
       cooldownTimer.start();
-      search();
+      triggerSearch();
     }
-  }, [needle, haystackHash, optionsHash, debounce, search]);
+  }, [needle, haystackHash, optionsHash, debounce]);
 
-  useTimerComplete(cooldownTimer, () => search(), [search]);
+  useTimerComplete(cooldownTimer, () => triggerSearch(), []);
 
   return results;
 }
