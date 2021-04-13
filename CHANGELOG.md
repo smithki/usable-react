@@ -1,3 +1,15 @@
+# v2.1.4 (Tue Apr 13 2021)
+
+#### 🐛 Bug Fix
+
+- Fix bug preventing `useFilter` search from being triggered [#31](https://github.com/smithki/usable-react/pull/31) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.1.3 (Mon Mar 08 2021)
 
 #### ⚠️ Pushed to `master`
