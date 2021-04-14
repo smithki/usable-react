@@ -1,11 +1,11 @@
-import { EffectCallback, useCallback, useEffect, useRef } from 'react';
+import { DependencyList, EffectCallback, useCallback, useEffect, useRef } from 'react';
 import { useEffectTrigger } from '../use-effect-trigger';
 import { useInitialRender } from '../use-initial-render';
 
 /**
  * Executes the given effect on an interval.
  */
-export function useInterval(effect: EffectCallback, deps: readonly any[], interval = 1000) {
+export function useInterval(effect: EffectCallback, deps: DependencyList, interval = 1000) {
   const savedCallback = useRef(effect);
   const isInitialRender = useInitialRender();
   const isCleared = useRef(false);

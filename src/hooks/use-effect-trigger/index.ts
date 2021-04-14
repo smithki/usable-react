@@ -1,4 +1,4 @@
-import { EffectCallback, useEffect, useReducer, useRef } from 'react';
+import { DependencyList, EffectCallback, useEffect, useReducer, useRef } from 'react';
 import { useCompare } from '../use-compare';
 
 /**
@@ -13,7 +13,7 @@ import { useCompare } from '../use-compare';
  * 3. Executing an effect after marshalling arbitrary state/data required for
  *    the effect to proceed.
  */
-export function useEffectTrigger(effect: EffectCallback, deps: readonly any[] = []) {
+export function useEffectTrigger(effect: EffectCallback, deps: DependencyList = []) {
   const [i, trigger] = useReducer((x: number) => x + 1, 0);
   const didTriggerUpdate = useCompare(i);
   const savedCallback = useRef(effect);
