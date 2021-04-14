@@ -1,9 +1,7 @@
 import Fuse from 'fuse.js';
-import { useEffect, useState } from 'react';
-import { useCompare } from '../use-compare';
+import { useState } from 'react';
 import { useHash } from '../use-hash';
-import { useTimer, useTimerComplete } from '../use-timer';
-import { useEffectTrigger } from '../use-effect-trigger';
+import { useDebouncedEffect } from '../use-debounced-effect';
 
 interface UseFilterOptions<TData> {
   /**
@@ -34,7 +32,6 @@ interface UseFilterOptions<TData> {
  */
 export function useFilter<TData = any>({ needle, haystack, debounce, searchOptions }: UseFilterOptions<TData> = {}) {
   const [results, setResults] = useState<TData[]>([]);
-  const cooldownTimer = useTimer({ length: 0, tick: 100, autoStart: false });
 
   const options: Fuse.IFuseOptions<TData> = {
     keys: [],
@@ -44,25 +41,17 @@ export function useFilter<TData = any>({ needle, haystack, debounce, searchOptio
   const haystackHash = useHash(haystack);
   const optionsHash = useHash(options);
 
-  const didNeedleChange = useCompare(needle);
-  const didHaystackChange = useCompare(haystackHash);
-  const didOptionsChange = useCompare(optionsHash);
-
-  const triggerSearch = useEffectTrigger(() => {
-    const fuse = new Fuse<TData>(haystack || [], options);
-    if (needle) setResults(fuse.search(needle).map((i) => i.item));
-  }, [needle, haystackHash, optionsHash, debounce]);
-
   // Execute a search if the needle/haystack changes.
-  useEffect(() => {
-    if (!cooldownTimer.isRunning() && (didNeedleChange || didHaystackChange || didOptionsChange)) {
-      cooldownTimer.reset(debounce);
-      cooldownTimer.start();
-      triggerSearch();
-    }
-  }, [needle, haystackHash, optionsHash, debounce]);
-
-  useTimerComplete(cooldownTimer, () => triggerSearch(), []);
+  useDebouncedEffect(
+    () => {
+      if (needle) {
+        const fuse = new Fuse<TData>(haystack || [], options);
+        if (needle) setResults(fuse.search(needle).map((i) => i.item));
+      }
+    },
+    debounce,
+    [needle, haystackHash, optionsHash],
+  );
 
   return results;
 }

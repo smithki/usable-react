@@ -1,4 +1,4 @@
-import { EffectCallback, useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import { DependencyList, EffectCallback, useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import { useCompare } from '../use-compare';
 
 export interface TimerHook {
@@ -160,7 +160,7 @@ export function useTimer(options: { length: number; tick?: number; autoStart?: b
  * @param effect - Imperative function that can return a cleanup function.
  * @param deps - If present, effect will only activate if the values in the list change.
  */
-export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: readonly any[] = []) {
+export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: DependencyList = []) {
   const didTimerChange = useCompare(timer.getRemaining());
   const savedCallback = useRef(effect);
 
@@ -184,7 +184,7 @@ export function useTimerEffect(timer: TimerHook, effect: EffectCallback, deps: r
  * @param effect - Imperative function that can return a cleanup function.
  * @param deps - If present, effect will only activate if the values in the list change.
  */
-export function useTimerComplete(timer: TimerHook, effect: EffectCallback, deps: readonly any[] = []) {
+export function useTimerComplete(timer: TimerHook, effect: EffectCallback, deps: DependencyList = []) {
   const didTimerChange = useCompare(timer.getRemaining());
   const savedCallback = useRef(effect);
 

@@ -3,6 +3,7 @@ export * from './hooks/use-click-outside';
 export * from './hooks/use-compare';
 export * from './hooks/use-clipboard';
 export * from './hooks/use-debounced';
+export * from './hooks/use-debounced-effect';
 export * from './hooks/use-deferred-children';
 export * from './hooks/use-dom-event';
 export * from './hooks/use-effect-after-mount';
