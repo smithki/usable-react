@@ -1,3 +1,15 @@
+# v2.2.0 (Wed Apr 14 2021)
+
+#### 🚀 Enhancement
+
+- Add `useDebouncedEffect` hook [#32](https://github.com/smithki/usable-react/pull/32) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.1.4 (Tue Apr 13 2021)
 
 #### 🐛 Bug Fix
