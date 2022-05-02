@@ -1,3 +1,15 @@
+# v3.0.0 (Mon May 02 2022)
+
+#### 💥 Breaking Change
+
+- React 18 support [#38](https://github.com/smithki/usable-react/pull/38) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v2.2.0 (Wed Apr 14 2021)
 
 #### 🚀 Enhancement
