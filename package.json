@@ -12,12 +12,12 @@
     "dist/**/*"
   ],
   "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "dev": "rollup -w -c rollup.config.js",
-    "build": "rollup -c rollup.config.js",
+    "dev": "melodist dev --outdir dist",
+    "build": "melodist build --no-minify --outdir dist",
     "lint": "eslint --fix src/**/*.ts",
     "clean": "rimraf dist",
     "test": "echo \"No tests to run!\"",
@@ -27,19 +27,19 @@
     "react": "^16.11.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
-    "fuse.js": "^6.4.6"
+    "fuse.js": "^6.4.6",
+    "md5": "~2.3.0"
   },
   "devDependencies": {
     "@ikscodes/eslint-config": "^7.0.2",
     "@ikscodes/prettier-config": "~2.0.1",
-    "@rollup/plugin-commonjs": "^17.1.0",
+    "@types/md5": "~2.3.2",
     "@types/node": "^12.11.5",
     "@types/react": "^16.9.9",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "agadoo": "^2.0.0",
-    "auto": "^9.60.1",
-    "builtin-modules": "^3.2.0",
+    "auto": "~10.36.5",
     "eslint": "^7.14.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
@@ -47,13 +47,10 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "melodist": "~0.7.8",
     "prettier": "^2.2.0",
     "react": "^17.0.1",
     "rimraf": "^2.6.1",
-    "rollup": "^2.40.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.1.2"
   }
 }

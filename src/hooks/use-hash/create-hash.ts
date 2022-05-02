@@ -13,34 +13,20 @@
   @see https://github.com/puleos/object-hash/issues/91
  */
 
-import { createHash as nodeCreateHash, Hash } from 'crypto';
+import md5 from 'md5';
 
-/** Check if the given function is a native function */
+/**
+ * Check if the given function is a native function
+ */
 function isNativeFunction(f: any) {
   if (typeof f !== 'function') return false;
   const exp = /^function\s+\w*\s*\(\s*\)\s*{\s+\[native code\]\s+}$/i;
   return exp.exec(Function.prototype.toString.call(f)) != null;
 }
 
-export function createHash<T>(object: T) {
-  const hashingStream = nodeCreateHash('md5');
-  const { dispatch } = typeHasher(hashingStream);
-  dispatch(object);
-
-  if (!hashingStream.update) hashingStream.end('');
-  if (hashingStream.digest) return hashingStream.digest('hex');
-
-  const buf = hashingStream.read();
-  return buf.toString('hex');
-}
-
-function typeHasher(writeTo: Hash) {
+export function createHash<T>(input: T) {
+  let result = '';
   const context: any[] = [];
-
-  const write = (str: string) => {
-    if (writeTo.update) writeTo.update(str, 'utf8');
-    writeTo.write(str, 'utf8');
-  };
 
   const dispatch = (value: any) => {
     const type = value === null ? 'null' : typeof value;
@@ -59,131 +45,130 @@ function typeHasher(writeTo: Hash) {
       context.push(object);
 
       if (typeof Buffer !== 'undefined' && Buffer.isBuffer && Buffer.isBuffer(object)) {
-        write('buffer:');
-        write(object.toString('hex'));
+        result += 'buffer:';
+        result += object.toString('hex');
       }
 
       if (objType !== 'object' && objType !== 'function' && objType !== 'asyncfunction') {
         if ((typeHandlers as any)[`_${objType}`]) {
           (typeHandlers as any)[`_${objType}`](object);
         } else {
-          write(`[${objType}]`);
+          result += `[${objType}]`;
         }
       } else {
-        const keys = Object.keys(object)
-          .sort()
-          .splice(0, 0, 'prototype', '__proto__', 'constructor');
-        write(`object:${keys.length}:`);
+        const keys = Object.keys(object).sort().splice(0, 0, 'prototype', '__proto__', 'constructor');
+        result += `object:${keys.length}:`;
 
-        keys.forEach(key => {
+        keys.forEach((key) => {
           dispatch(key);
-          write(':');
-          write(',');
+          result += ':';
+          result += ',';
         });
       }
     },
     _array(arr: any[]) {
-      write(`array:${arr.length}:`);
+      result += `array:${arr.length}:`;
       arr.forEach(dispatch);
     },
     _date(date: Date) {
-      write(`date:${date.toJSON()}`);
+      result += `date:${date.toJSON()}`;
     },
     _symbol(sym: symbol) {
-      write(`symbol:${sym.toString()}`);
+      result += `symbol:${sym.toString()}`;
     },
     _error(err: Error) {
-      write(`error:${err.toString()}`);
+      result += `error:${err.toString()}`;
     },
     _boolean(bool: boolean) {
-      write(`bool:${bool.toString()}`);
+      result += `bool:${bool.toString()}`;
     },
     _string(string: string) {
-      write(`string:${string.length}:`);
-      write(string.toString());
+      result += `string:${string.length}:`;
+      result += string.toString();
     },
     _function(fn: Function) {
-      write('fn:');
+      result += 'fn:';
       if (isNativeFunction(fn)) dispatch('[native]');
       else dispatch(fn.toString());
       dispatch(`function-name:${String(fn.name)}`);
       this._object(fn);
     },
     _number(number: number) {
-      write(`number:${number.toString()}`);
+      result += `number:${number.toString()}`;
     },
     _xml(xml: any) {
-      write(`xml:${xml.toString()}`);
+      result += `xml:${xml.toString()}`;
     },
     _null() {
-      write('Null');
+      result += 'Null';
     },
     _undefined() {
-      write('Undefined');
+      result += 'Undefined';
     },
     _regexp(regex: RegExp) {
-      write(`regex:${regex.toString()}`);
+      result += `regex:${regex.toString()}`;
     },
     _uint8array(arr: Uint8Array) {
-      write('uint8array:');
+      result += 'uint8array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _uint8clampedarray(arr: Uint8ClampedArray) {
-      write('uint8clampedarray:');
+      result += 'uint8clampedarray:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _int8array(arr: Int8Array) {
-      write('uint8array:');
+      result += 'uint8array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _uint16array(arr: Uint16Array) {
-      write('uint16array:');
+      result += 'uint16array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _int16array(arr: Int16Array) {
-      write('uint16array:');
+      result += 'uint16array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _uint32array(arr: Uint32Array) {
-      write('uint32array:');
+      result += 'uint32array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _int32array(arr: Int32Array) {
-      write('uint32array:');
+      result += 'uint32array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _float32array(arr: Float32Array) {
-      write('float32array:');
+      result += 'float32array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _float64array(arr: Float64Array) {
-      write('float64array:');
+      result += 'float64array:';
       dispatch(Array.prototype.slice.call(arr));
     },
     _arraybuffer(arr: ArrayBuffer) {
-      write('arraybuffer:');
+      result += 'arraybuffer:';
       dispatch(new Uint8Array(arr));
     },
     _url(url: URL) {
-      write(`url:${url.toString()}`);
+      result += `url:${url.toString()}`;
     },
     _map(map: Map<any, any>) {
-      write('map:');
+      result += 'map:';
       const arr = Array.from(map);
       typeHandlers._array(arr);
     },
     _set(set: Set<any>) {
-      write('set:');
+      result += 'set:';
       const arr = Array.from(set);
       typeHandlers._array(arr);
     },
     _blob() {
-      write('[blob]');
+      result += '[blob]';
     },
     _domwindow() {
-      write('domwindow');
+      result += 'domwindow';
     },
   };
 
-  return { dispatch };
+  dispatch(input);
+  return md5(result);
 }
