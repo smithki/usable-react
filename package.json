@@ -21,10 +21,10 @@
     "lint": "eslint --fix src/**/*.ts",
     "clean": "rimraf dist",
     "test": "echo \"No tests to run!\"",
-    "test:tree-shaking": "yarn build && agadoo"
+    "test:tree-shaking": "npm run build && agadoo"
   },
   "peerDependencies": {
-    "react": "^16.11.0 || ^17.0.0"
+    "react": "^16.11.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "fuse.js": "^6.4.6"
