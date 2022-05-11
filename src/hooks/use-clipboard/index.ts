@@ -83,9 +83,9 @@ function isEphemeralCopyToClipboardTextarea(element: any): element is HTMLTextAr
 }
 
 interface CopyFn {
-  (source?: string): void;
-  (source?: Event): void;
-  (source?: any): void;
+  (source?: string): Promise<void>;
+  (source?: Event): Promise<void>;
+  (source?: any): Promise<void>;
 }
 
 interface OnCopyHandler {
