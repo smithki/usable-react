@@ -35,4 +35,5 @@ npm install usable-react
 - [`useForceUpdate`](./docs/use-force-update.md)
 - [`useHash`](./docs/use-hash.md)
 - [`useHashCompare`](./docs/use-hash-compare.md)
+- [`useInitialRender`](./docs/use-initial-render.md)
 
