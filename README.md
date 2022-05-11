@@ -31,4 +31,5 @@ npm install usable-react
 - [`useDomEvent`](./docs/use-dom-event.md)
 - [`useEffectAfterMount`](./docs/use-effect-after-mount.md)
 - [`useEffectTrigger`](./docs/use-effect-trigger.md)
+- [`useFilter`](./docs/use-filter.md)
 
