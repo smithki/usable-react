@@ -21,5 +21,31 @@ npm install usable-react
 
 ## Usage
 
-[Documentation forthcoming...]
+### `useAsyncEffect`
+
+Enables safe usage of asynchronous effects with automatic protection against memory-leaks should your asynchronous business resolve after a component has unmounted.
+
+```tsx
+useAsyncEffect(async (ctx) => {
+  ctx.hello = 'world'; // Attach anything you like to the context object!
+  return fetch('...').then(res => res.json());
+}, [/* effect dependencies */])
+.fulfilled((value, ctx) => {
+    // Equivalent to `Promise.then`
+    console.log(value); // Do something with your JSON!
+    console.log(ctx.hello) // => 'world'
+  })
+.rejected((reason, ctx) => {
+    // Equivalent to `Promise.catch`
+    // ...
+  })
+.settled((ctx) => {
+    // Equivalent to `Promise.finally`
+    // ...
+  })
+.cleanup((ctx) => {
+  // Defines the same behavior as a function returned by `useEffect`
+  // ...
+});
+```
 
