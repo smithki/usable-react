@@ -36,4 +36,5 @@ npm install usable-react
 - [`useHash`](./docs/use-hash.md)
 - [`useHashCompare`](./docs/use-hash-compare.md)
 - [`useInitialRender`](./docs/use-initial-render.md)
+- [`useInterval`](./docs/use-interval.md)
 
