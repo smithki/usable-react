@@ -33,4 +33,5 @@ npm install usable-react
 - [`useEffectTrigger`](./docs/use-effect-trigger.md)
 - [`useFilter`](./docs/use-filter.md)
 - [`useForceUpdate`](./docs/use-force-update.md)
+- [`useHash`](./docs/use-hash.md)
 
