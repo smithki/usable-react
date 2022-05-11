@@ -21,5 +21,8 @@ npm install usable-react
 
 ## Documentation
 
-- [`useAsyncEffect`](./docs/useAsyncEffect.md)
+- [`useAsyncEffect`](./docs/use-async-effect.md)
+- [`useClickOutside`](./docs/use-click-outside.md)
+- [`useClipboard`](./docs/use-clipboard.md)
+- [`useCompare`](./docs/use-compare.md)
 
