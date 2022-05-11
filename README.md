@@ -27,4 +27,5 @@ npm install usable-react
 - [`useCompare`](./docs/use-compare.md)
 - [`useDebounced`](./docs/use-debounced.md)
 - [`useDebouncedEffect`](./docs/use-debounced-effect.md)
+- [`useDeferredChildren`](./docs/use-deferred-children.md)
 
