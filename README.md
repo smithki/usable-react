@@ -23,7 +23,7 @@ npm install usable-react
 
 ### `useAsyncEffect`
 
-Enables safe usage of asynchronous effects with automatic protection against memory-leaks should your asynchronous business resolve after a component has unmounted.
+Enables asynchronous effects with some guardrails to protect against memory-leaks if your asynchronous business resolves _after_ the React component has unmounted.
 
 ```tsx
 useAsyncEffect(async (ctx) => {
