@@ -26,4 +26,5 @@ npm install usable-react
 - [`useClipboard`](./docs/use-clipboard.md)
 - [`useCompare`](./docs/use-compare.md)
 - [`useDebounced`](./docs/use-debounced.md)
+- [`useDebouncedEffect`](./docs/use-debounced-effect.md)
 
