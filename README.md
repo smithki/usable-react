@@ -32,4 +32,5 @@ npm install usable-react
 - [`useEffectAfterMount`](./docs/use-effect-after-mount.md)
 - [`useEffectTrigger`](./docs/use-effect-trigger.md)
 - [`useFilter`](./docs/use-filter.md)
+- [`useForceUpdate`](./docs/use-force-update.md)
 
