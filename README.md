@@ -28,4 +28,5 @@ npm install usable-react
 - [`useDebounced`](./docs/use-debounced.md)
 - [`useDebouncedEffect`](./docs/use-debounced-effect.md)
 - [`useDeferredChildren`](./docs/use-deferred-children.md)
+- [`useDomEvent`](./docs/use-dom-event.md)
 
