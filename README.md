@@ -34,4 +34,5 @@ npm install usable-react
 - [`useFilter`](./docs/use-filter.md)
 - [`useForceUpdate`](./docs/use-force-update.md)
 - [`useHash`](./docs/use-hash.md)
+- [`useHashCompare`](./docs/use-hash-compare.md)
 
