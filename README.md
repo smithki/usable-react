@@ -38,4 +38,5 @@ npm install usable-react
 - [`useInitialRender`](./docs/use-initial-render.md)
 - [`useInterval`](./docs/use-interval.md)
 - [`useIsMounted`](./docs/use-is-mounted.md)
+- [`usePrevious`](./docs/use-previous.md)
 
