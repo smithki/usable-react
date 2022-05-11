@@ -25,4 +25,5 @@ npm install usable-react
 - [`useClickOutside`](./docs/use-click-outside.md)
 - [`useClipboard`](./docs/use-clipboard.md)
 - [`useCompare`](./docs/use-compare.md)
+- [`useDebounced`](./docs/use-debounced.md)
 
