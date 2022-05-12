@@ -39,4 +39,5 @@ npm install usable-react
 - [`useInterval`](./docs/use-interval.md)
 - [`useIsMounted`](./docs/use-is-mounted.md)
 - [`usePrevious`](./docs/use-previous.md)
+- [`useTimer`](./docs/use-timer.md)
 
