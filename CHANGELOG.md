@@ -1,3 +1,15 @@
+# v4.0.0 (Thu May 12 2022)
+
+#### 💥 Breaking Change
+
+- Document things (finally) [#39](https://github.com/smithki/usable-react/pull/39) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v3.0.0 (Mon May 02 2022)
 
 #### 💥 Breaking Change
