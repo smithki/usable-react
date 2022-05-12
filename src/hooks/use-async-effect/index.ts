@@ -8,14 +8,14 @@ type NarrowedAsyncEffect<TContext, TResult, TVisited extends string | void, TNar
   NonVoid<TVisited> | TNarrow
 >;
 
-interface AsyncEffect<TContext, TResult, TVisited extends string | void = void> {
+export interface AsyncEffect<TContext, TResult, TVisited extends string | void = void> {
   /**
    * Registers a callback to execute when the async handler resolves. Analagous
    * to `Promise.then`.
    */
-  fullfilled(
+  fulfilled(
     onfulfilled?: ((value: TResult, context: Partial<TContext>) => void) | null,
-  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'fullfilled'>;
+  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'fulfilled'>;
 
   /**
    * Registers a callback to execute when the async handler rejects. Analagous
@@ -38,7 +38,7 @@ interface AsyncEffect<TContext, TResult, TVisited extends string | void = void> 
    * cleaned up.
    */
   cleanup(
-    onfulfilled?: ((context: Partial<TContext>) => void) | null,
+    oncleanup?: ((context: Partial<TContext>) => void) | null,
   ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'cleanup'>;
 }
 
@@ -47,7 +47,7 @@ interface AsyncEffect<TContext, TResult, TVisited extends string | void = void> 
  * against updating internal component state if the component is unmounted
  * before the async work is finished.
  */
-export function useAsyncEffect<TContext extends { [key: string]: any } = { [key: string]: any }, TResult = any>(
+export function useAsyncEffect<TContext extends Record<string, any> = Record<string, any>, TResult = any>(
   handler: (context: Partial<TContext>) => Promise<TResult>,
   deps?: DependencyList,
 ): AsyncEffect<TContext, TResult> {
@@ -77,7 +77,8 @@ export function useAsyncEffect<TContext extends { [key: string]: any } = { [key:
 
   const chain: any = useMemo(() => {
     return {
-      fullfilled: registerThenCb,
+      fullfilled: registerThenCb, // backwards compat for spelling mistake
+      fulfilled: registerThenCb,
       rejected: registerCatchCb,
       settled: registerFinallyCb,
       cleanup: registerCleanupCb,

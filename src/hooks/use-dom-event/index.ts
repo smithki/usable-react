@@ -5,7 +5,7 @@ import { isDocument, isElement, isRefObject, isWindow } from '../../utils/instan
 
 interface AddEventListenerFunction<
   T extends HTMLElement | Window | Document,
-  EventMap extends HTMLElementEventMap | WindowEventMap | DocumentEventMap
+  EventMap extends HTMLElementEventMap | WindowEventMap | DocumentEventMap,
 > {
   <K extends keyof EventMap>(
     eventName: K,

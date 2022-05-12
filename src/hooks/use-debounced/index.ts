@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  */
 export function useDebounced<T>(value: T, delay = 300) {
   const isSynchronous = delay === 0;
-  const [debouncedValue, setDebouncedValue] = useState<T>((undefined as unknown) as T);
+  const [debouncedValue, setDebouncedValue] = useState<T>(undefined as unknown as T);
 
   useEffect(() => {
     const id = setTimeout(() => {
