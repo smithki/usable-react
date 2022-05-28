@@ -1,6 +1,6 @@
 # `useEffectAfterMount`
 
-Same as React's native `useEffect`, except that it will skip the initial render.
+Same as React's `useEffect`, except that it will skip the initial render.
 
 ## Example
 

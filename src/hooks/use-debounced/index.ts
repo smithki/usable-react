@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Debounces the given value. If `delay` is zero, the value is updated
- * synchronously.
+ * Debounces the given value.
+ * If `delay` is zero, the value is updated synchronously.
  */
 export function useDebounced<T>(value: T, delay = 300) {
   const isSynchronous = delay === 0;

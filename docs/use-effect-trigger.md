@@ -1,6 +1,6 @@
 # `useEffectTrigger`
 
-Registers a side effect with the same signature as React's native `useEffect`, but the effect will only execute when the manual trigger function returned by this hook is invoked.
+Registers a side effect with the same signature as React's `useEffect`, but the effect will only execute when the manual trigger function returned by this hook is invoked.
 
 A few use-cases for this hook include:
 
