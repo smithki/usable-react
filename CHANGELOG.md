@@ -1,3 +1,15 @@
+# v4.1.0 (Sat May 28 2022)
+
+#### 🚀 Enhancement
+
+- Add new hook: `useEffectOnce` [#40](https://github.com/smithki/usable-react/pull/40) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v4.0.0 (Thu May 12 2022)
 
 #### 💥 Breaking Change
