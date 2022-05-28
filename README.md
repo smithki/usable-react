@@ -30,6 +30,7 @@ npm install usable-react
 - [`useDeferredChildren`](./docs/use-deferred-children.md)
 - [`useDomEvent`](./docs/use-dom-event.md)
 - [`useEffectAfterMount`](./docs/use-effect-after-mount.md)
+- [`useEffectOnce`](./docs/use-effect-once.md)
 - [`useEffectTrigger`](./docs/use-effect-trigger.md)
 - [`useFilter`](./docs/use-filter.md)
 - [`useForceUpdate`](./docs/use-force-update.md)

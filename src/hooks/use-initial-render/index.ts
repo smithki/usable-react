@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useEffectOnce } from '../use-effect-once';
 
 /**
  * Returns a `boolean` indicating whether the current update is the intial
@@ -6,8 +7,8 @@ import { useEffect, useRef } from 'react';
  */
 export function useInitialRender() {
   const isInitialRender = useRef(true);
-  useEffect(() => {
+  useEffectOnce(() => {
     isInitialRender.current = false;
-  }, []);
+  });
   return isInitialRender.current;
 }

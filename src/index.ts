@@ -7,6 +7,7 @@ export * from './hooks/use-debounced-effect';
 export * from './hooks/use-deferred-children';
 export * from './hooks/use-dom-event';
 export * from './hooks/use-effect-after-mount';
+export * from './hooks/use-effect-once';
 export * from './hooks/use-effect-trigger';
 export * from './hooks/use-filter';
 export * from './hooks/use-force-update';

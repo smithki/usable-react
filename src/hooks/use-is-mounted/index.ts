@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import { useEffectOnce } from '../use-effect-once';
 
 /**
  * Returns a memoized callback that when invoked returns `boolean` indicating if
@@ -7,13 +8,13 @@ import { useRef, useEffect, useCallback } from 'react';
 export function useIsMounted() {
   const isMountedRef = useRef(false);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     isMountedRef.current = true;
 
     return () => {
       isMountedRef.current = false;
     };
-  }, []);
+  });
 
   return useCallback(() => isMountedRef.current, []);
 }
