@@ -6,25 +6,31 @@ Enables asynchronous effects with some guardrails to protect against memory-leak
 ## Example
 
 ```tsx
-useAsyncEffect(async (ctx) => {
-  ctx.hello = 'world'; // Attach anything you like to the context object!
-  return fetch('...').then(res => res.json());
-}, [/* effect dependencies */])
-.fulfilled((value, ctx) => {
-    // Equivalent to `Promise.then`
-    console.log(value); // Do something with your JSON!
-    console.log(ctx.hello) // => 'world'
-  })
-.rejected((reason, ctx) => {
-    // Equivalent to `Promise.catch`
-    // ...
-  })
-.settled((ctx) => {
-    // Equivalent to `Promise.finally`
-    // ...
-  })
-.cleanup((ctx) => {
-  // Defines the same behavior as a function returned by `useEffect`
-  // ...
+useAsyncEffect(() => {
+  return {
+    execute: async (signal) => {
+      return fetch('...', { signal }).then(res => res.json());
+    },
+
+    onFulfilled: (value) => {
+      // Equivalent to `Promise.then`
+      console.log(value); // Do something stateful with your JSON!
+    },
+
+    onRejected: (reason) => {
+      // Equivalent to `Promise.catch`
+      // ...
+    },
+
+    onSettled: () => {
+      // Equivalent to `Promise.finally`
+      // ...
+    },
+
+    onCleanup: () => {
+      // Defines the same behavior as a function returned by `useEffect`
+      // ...
+    },
+  }
 });
 ```
