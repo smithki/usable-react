@@ -1,45 +1,35 @@
-import { DependencyList, useEffect, useCallback, useRef, useMemo } from 'react';
+import { DependencyList, useEffect, useMemo, useRef } from 'react';
 import { useIsMounted } from '../use-is-mounted';
 
-type NonVoid<T> = T extends void ? never : T;
+export interface AsyncEffectInit<ResultType> {
+  /**
+   * Do something async!
+   */
+  execute: (signal: AbortSignal) => Promise<ResultType>;
 
-type NarrowedAsyncEffect<TContext, TResult, TVisited extends string | void, TNarrow extends string> = Omit<
-  AsyncEffect<TContext, TResult, TVisited | TNarrow>,
-  NonVoid<TVisited> | TNarrow
->;
-
-export interface AsyncEffect<TContext, TResult, TVisited extends string | void = void> {
   /**
    * Registers a callback to execute when the async handler resolves. Analagous
    * to `Promise.then`.
    */
-  fulfilled(
-    onfulfilled?: ((value: TResult, context: Partial<TContext>) => void) | null,
-  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'fulfilled'>;
+  onFulfilled?: ((value: ResultType) => void) | null;
 
   /**
    * Registers a callback to execute when the async handler rejects. Analagous
    * to `Promise.catch`.
    */
-  rejected(
-    onrejected?: ((reason: any, context: Partial<TContext>) => void) | null,
-  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'rejected'>;
+  onRejected?: ((reason: any) => void) | null;
 
   /**
    * Registers a callback to execute when the async handler completes, whether
    * successfully or not. Analagous to `Promise.finally`.
    */
-  settled(
-    onsettled?: ((context: Partial<TContext>) => void) | null,
-  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'settled'>;
+  onSettled?: (() => void) | null;
 
   /**
    * Registers a callback to execute when the underlying `React.useEffect` is
    * cleaned up.
    */
-  cleanup(
-    oncleanup?: ((context: Partial<TContext>) => void) | null,
-  ): NarrowedAsyncEffect<TContext, TResult, TVisited, 'cleanup'>;
+  onCleanup?: (() => void) | null;
 }
 
 /**
@@ -47,62 +37,33 @@ export interface AsyncEffect<TContext, TResult, TVisited extends string | void =
  * against updating internal component state if the component is unmounted
  * before the async work is finished.
  */
-export function useAsyncEffect<TContext extends Record<string, any> = Record<string, any>, TResult = any>(
-  handler: (context: Partial<TContext>) => Promise<TResult>,
+export function useAsyncEffect<ResultType = any>(
+  initFactory: () => AsyncEffectInit<ResultType>,
   deps?: DependencyList,
-): AsyncEffect<TContext, TResult> {
-  const thenCallback = useRef<any>();
-  const registerThenCb = useCallback((onfulfilled) => {
-    thenCallback.current = onfulfilled;
-    return chain;
-  }, []);
-
-  const catchCallback = useRef<any>();
-  const registerCatchCb = useCallback((onrejected) => {
-    catchCallback.current = onrejected;
-    return chain;
-  }, []);
-
-  const finallyCallback = useRef<any>();
-  const registerFinallyCb = useCallback((onsettled) => {
-    finallyCallback.current = onsettled;
-    return chain;
-  }, []);
-
-  const cleanupCallback = useRef<any>();
-  const registerCleanupCb = useCallback((oncleanup) => {
-    cleanupCallback.current = oncleanup;
-    return chain;
-  }, []);
-
-  const chain: any = useMemo(() => {
-    return {
-      fullfilled: registerThenCb, // backwards compat for spelling mistake
-      fulfilled: registerThenCb,
-      rejected: registerCatchCb,
-      settled: registerFinallyCb,
-      cleanup: registerCleanupCb,
-    };
-  }, []);
+): void {
+  const init = useMemo<AsyncEffectInit<ResultType>>(() => {
+    return initFactory();
+  }, [deps]);
 
   const isMounted = useIsMounted();
   useEffect(() => {
-    const context: any = {};
+    const controller = new AbortController();
 
-    handler(context)
+    init
+      .execute(controller.signal)
       .then((value) => {
-        if (isMounted() && thenCallback.current) thenCallback.current(value, context);
+        if (isMounted() && !controller.signal.aborted) init.onFulfilled?.(value);
       })
       .catch((err) => {
-        if (isMounted() && catchCallback.current) catchCallback.current(err, context);
+        if (isMounted() && !controller.signal.aborted) init.onRejected?.(err);
       })
       .finally(() => {
-        if (isMounted() && finallyCallback.current) finallyCallback.current(context);
+        if (isMounted() && !controller.signal.aborted) init.onSettled?.();
       });
 
-    if (cleanupCallback.current) return () => cleanupCallback.current(context);
-    return undefined;
-  }, deps);
-
-  return chain;
+    return () => {
+      controller.abort();
+      init.onCleanup?.();
+    };
+  }, [init]);
 }
