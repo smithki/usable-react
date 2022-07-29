@@ -1,3 +1,15 @@
+# v5.0.0 (Fri Jul 29 2022)
+
+#### 💥 Breaking Change
+
+- breaking API changes to useAsyncEffect [#41](https://github.com/smithki/usable-react/pull/41) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v4.1.0 (Sat May 28 2022)
 
 #### 🚀 Enhancement
