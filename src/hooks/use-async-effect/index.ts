@@ -40,7 +40,7 @@ export interface AsyncEffectInit<ResultType> {
  */
 export function useAsyncEffect<ResultType = any>(
   initFactory: () => AsyncEffectInit<ResultType>,
-  deps?: DependencyList,
+  deps: DependencyList = [],
 ): void {
   const init = useMemo<AsyncEffectInit<ResultType>>(() => {
     return initFactory();
