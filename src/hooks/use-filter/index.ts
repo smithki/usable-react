@@ -1,9 +1,11 @@
-import Fuse from 'fuse.js';
 import { useState } from 'react';
-import { useHash } from '../use-hash';
-import { useDebouncedEffect } from '../use-debounced-effect';
 
-interface UseFilterOptions<TData> {
+import Fuse from 'fuse.js';
+
+import { useDebouncedEffect } from '../use-debounced-effect';
+import { useHash } from '../use-hash';
+
+export interface UseFilterOptions<TData> {
   /**
    * The search term that will be used to query the `haystack`.
    */

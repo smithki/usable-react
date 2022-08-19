@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useMemo, useRef } from 'react';
+import { DependencyList, useEffect, useMemo } from 'react';
 
 import { useIsMounted } from '../use-is-mounted';
 
@@ -44,7 +44,6 @@ export function useAsyncEffect<ResultType = any>(
 ): void {
   const init = useMemo<AsyncEffectInit<ResultType>>(() => {
     return initFactory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   const isMounted = useIsMounted();
@@ -67,6 +66,5 @@ export function useAsyncEffect<ResultType = any>(
       controller.abort();
       init.onCleanup?.();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [init]);
 }

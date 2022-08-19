@@ -5,7 +5,7 @@ Allows your React component to hook into native DOM events that exist outside th
 ## Examples
 
 ```tsx
-const addWindowEvent = useDomEvent(window);
+const addWindowEvent = useDomEventListeners(window);
 
 addWindowEvent('click', () => {
   console.log('window was clicked!');
@@ -14,7 +14,7 @@ addWindowEvent('click', () => {
 
 ```tsx
 const ref = useRef<HTMLDivElement>(null);
-const addRefEvent = useDomEvent(ref);
+const addRefEvent = useDomEventListeners(ref);
 
 addRefEvent('click', () => {
   console.log('ref was clicked!');

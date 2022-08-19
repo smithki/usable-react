@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 /**
  * Debounces the given value.
  * If `delay` is zero, the value is updated synchronously.
+ *
+ * @param value - The raw value to debounce.
+ * @param delay - Number of milliseconds to debouce `value` [default: `300`].
  */
 export function useDebounced<T>(value: T, delay = 300) {
   const isSynchronous = delay === 0;

@@ -1,10 +1,11 @@
 import { DependencyList, EffectCallback, useEffect } from 'react';
+
 import { useEffectTrigger } from '../use-effect-trigger';
 import { useInitialRender } from '../use-initial-render';
 
 /**
- * Debounces an effect. If `delay` is zero,
- * the effect is executed synchronously.
+ * Debounces an effect.
+ * If `delay` is zero, the effect is executed synchronously.
  *
  * The effect executes synchronously on the first render.
  */

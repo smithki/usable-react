@@ -1,4 +1,5 @@
 import { EffectCallback, useEffect, useRef } from 'react';
+
 import { useForceUpdate } from '../use-force-update';
 
 /**

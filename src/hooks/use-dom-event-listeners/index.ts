@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-shadow */
 
-import { MutableRefObject, RefObject, useCallback, useEffect, useRef } from 'react';
-import { isDocument, isElement, isRefObject, isWindow } from '../../utils/instance-of';
+import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 
-interface AddEventListenerFunction<
+import { isDocument, isElement, isRefObject, isWindow } from '../../utils/instance-of';
+import { useCallbackConst } from '../use-const';
+
+export interface AddEventListenerFunction<
   T extends HTMLElement | Window | Document,
   EventMap extends HTMLElementEventMap | WindowEventMap | DocumentEventMap,
 > {
@@ -44,13 +47,13 @@ export type UseDomEventAddListenerFunction<T extends HTMLElement | Window | Docu
  * the event listener manually. Event listeners created this way are
  * automatically cleaned up before the component unmounts.
  */
-export function useDomEvent<T extends HTMLElement | Window | Document | null>(
+export function useDomEventListeners<T extends HTMLElement | Window | Document | null>(
   taget: T | MutableRefObject<T> | RefObject<T>,
 ): UseDomEventAddListenerFunction<T>;
-export function useDomEvent<T extends HTMLElement | Window | Document | null>(
+export function useDomEventListeners<T extends HTMLElement | Window | Document | null>(
   taget: () => T | MutableRefObject<T> | RefObject<T>,
 ): UseDomEventAddListenerFunction<T>;
-export function useDomEvent<T extends HTMLElement | Window | Document | null>(
+export function useDomEventListeners<T extends HTMLElement | Window | Document | null>(
   target: T | (() => T) | MutableRefObject<T> | RefObject<T>,
 ): UseDomEventAddListenerFunction<T> {
   return ((...eventListenerParams: any[]) => {
@@ -108,6 +111,6 @@ export function useDomEvent<T extends HTMLElement | Window | Document | null>(
       return undefined;
     }, [eventName, typeof target !== 'function' && target, ...deps]);
 
-    return useCallback(() => removeListenerRef.current(), []);
+    return useCallbackConst(() => removeListenerRef.current());
   }) as UseDomEventAddListenerFunction<T>;
 }
