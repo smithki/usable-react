@@ -1,3 +1,15 @@
+# v5.0.1 (Fri Aug 19 2022)
+
+#### ⚠️ Pushed to `master`
+
+- Fix dependencies bug in useAsyncEffect ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v5.0.0 (Fri Jul 29 2022)
 
 #### 💥 Breaking Change
