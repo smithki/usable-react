@@ -44,7 +44,7 @@ export function useAsyncEffect<ResultType = any>(
 ): void {
   const init = useMemo<AsyncEffectInit<ResultType>>(() => {
     return initFactory();
-  }, [deps]);
+  }, deps);
 
   const isMounted = useIsMounted();
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { DependencyList, useEffect, useRef, useState } from 'react';
 
-import { ReactRef } from '../../utils/element-refs';
+import { ElementOrRef, resolveElement } from '../../utils/element-refs';
 import { useCallbackConst } from '../use-const';
 import { useIsMounted } from '../use-is-mounted';
 
@@ -8,7 +8,7 @@ function hasIntersectionObserver() {
   return typeof window.IntersectionObserver !== 'undefined';
 }
 
-export interface UseIntersectionObserverOptions<T extends ReactRef<Element>> extends IntersectionObserverInit {
+export interface UseIntersectionObserverOptions<T extends ElementOrRef<Element>> extends IntersectionObserverInit {
   ref: T;
   freezeOnceVisible?: boolean;
   handleEntry?: (entry: IntersectionObserverEntry) => void;
@@ -27,7 +27,7 @@ export interface UseIntersectionObserverOptions<T extends ReactRef<Element>> ext
  *   - Add support for effect dependencies
  *   - Skip the callback intersection callback if component is not mounted
  */
-export function useIntersectionObserver<T extends ReactRef<Element>>(
+export function useIntersectionObserver<T extends ElementOrRef<Element>>(
   {
     ref,
     threshold = 0,
@@ -56,7 +56,7 @@ export function useIntersectionObserver<T extends ReactRef<Element>>(
   });
 
   useEffect(() => {
-    const node = ref?.current;
+    const node = resolveElement<Element>(ref);
 
     if (!hasIntersectionObserver() || frozen || !node) return;
 
