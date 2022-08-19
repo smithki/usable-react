@@ -1,3 +1,19 @@
+# v6.0.0 (Fri Aug 19 2022)
+
+#### 💥 Breaking Change
+
+- V6 [#42](https://github.com/smithki/usable-react/pull/42) ([@smithki](https://github.com/smithki))
+
+#### ⚠️ Pushed to `master`
+
+- Publish v6 ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v5.0.1 (Fri Aug 19 2022)
 
 #### ⚠️ Pushed to `master`
