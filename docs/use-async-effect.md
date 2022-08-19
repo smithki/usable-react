@@ -32,5 +32,5 @@ useAsyncEffect(() => {
       // ...
     },
   }
-});
+}, [/* effect dependencies */]);
 ```
