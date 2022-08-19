@@ -1,4 +1,6 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef } from 'react';
+
+import { useCallbackConst } from '../use-const';
 import { useEffectOnce } from '../use-effect-once';
 
 /**
@@ -16,5 +18,5 @@ export function useIsMounted() {
     };
   });
 
-  return useCallback(() => isMountedRef.current, []);
+  return useCallbackConst(() => isMountedRef.current);
 }

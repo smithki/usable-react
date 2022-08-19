@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-regexp-exec */
 
 import { useCallback, useRef } from 'react';
+
 import { CAN_USE_DOM } from '../../utils/can-use-dom';
 
 let clipboardID = 0;
@@ -96,6 +97,8 @@ interface OnCopyHandler {
  * Creates a memoized callback—`copy`—that interacts with the user's computer clipboard.
  * Also provides a `ref` to attach to inputs, which can then be used as a source
  * for the clipboard value.
+ *
+ * @param onCopy - Optional callback called upon each `copy` event.
  */
 function useClipboardImpl(onCopy?: OnCopyHandler) {
   const ref = useRef<HTMLInputElement | null>(null);
@@ -119,4 +122,7 @@ function useClipboardImpl(onCopy?: OnCopyHandler) {
   return { copy, ref };
 }
 
-export const useClipboard = /* @__PURE__ */ Object.assign(useClipboardImpl, { isEphemeralCopyToClipboardTextarea });
+export const useClipboard = /* @__PURE__ */ Object.assign(useClipboardImpl, {
+  isEphemeralCopyToClipboardTextarea,
+  copyToClipboard,
+});

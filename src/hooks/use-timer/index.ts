@@ -1,5 +1,7 @@
-import { DependencyList, EffectCallback, useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import { DependencyList, EffectCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+
 import { useCompare } from '../use-compare';
+import { useCallbackConst } from '../use-const';
 
 export interface TimerHook {
   /**
@@ -82,36 +84,36 @@ export function useTimer(options: { length: number; tick?: number; autoStart?: b
 
   // Build timer functionality callbacks.
 
-  const start = useCallback(() => {
+  const start = useCallbackConst(() => {
     if (!isRunning.current && !isStarted.current) {
       isRunning.current = true;
       isStarted.current = true;
       forceUpdate();
     }
-  }, []);
+  });
 
-  const pause = useCallback(() => {
+  const pause = useCallbackConst(() => {
     if (isRunning.current) {
       isRunning.current = false;
       forceUpdate();
     }
-  }, []);
+  });
 
-  const resume = useCallback(() => {
+  const resume = useCallbackConst(() => {
     if (!isRunning.current && isStarted.current) {
       isRunning.current = true;
       forceUpdate();
     }
-  }, []);
+  });
 
-  const reset = useCallback((newLength?: number, newTick?: number) => {
+  const reset = useCallbackConst((newLength?: number, newTick?: number) => {
     if (newTick) tickRef.current = newTick;
     if (newLength) lengthRef.current = newLength;
     if (isRunning.current) isRunning.current = false;
     remaining.current = newLength || lengthRef.current;
     isStarted.current = false;
     forceUpdate();
-  }, []);
+  });
 
   // Update the timer.
   useEffect(() => {

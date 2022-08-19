@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+
 import { useEffectOnce } from '../use-effect-once';
 
 /**

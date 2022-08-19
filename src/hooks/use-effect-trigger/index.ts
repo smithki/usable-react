@@ -1,4 +1,5 @@
 import { DependencyList, EffectCallback, useEffect, useReducer, useRef } from 'react';
+
 import { useCompare } from '../use-compare';
 
 /**

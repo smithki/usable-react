@@ -1,4 +1,5 @@
-import { DependencyList, useEffect, useMemo, useRef } from 'react';
+import { DependencyList, useEffect, useMemo } from 'react';
+
 import { useIsMounted } from '../use-is-mounted';
 
 export interface AsyncEffectInit<ResultType> {
