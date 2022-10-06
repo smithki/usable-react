@@ -8,9 +8,12 @@ import { useRef } from 'react';
  * @see the LICENSE file at the root of this source tree:
  *   https://github.com/chakra-ui/chakra-ui/blob/6e259a1f7008a00f7be096e6b315cb9d62ef9748/packages/hooks/src/use-const.ts
  *
- * Modifications from original source: none
+ * Modifications from original source:
+ *   - TypeScript improvements using overload definitions
  */
-export function useConst<T>(init: T | (() => T)): T {
+export function useConst<T>(init: T | (() => T)): T;
+export function useConst<T = undefined>(): T | undefined;
+export function useConst<T>(init?: T | (() => T)): T | undefined {
   // `useRef` is less expensive than `useState`.
   const ref = useRef<T | null>(null);
 
@@ -19,11 +22,4 @@ export function useConst<T>(init: T | (() => T)): T {
   }
 
   return ref.current as T;
-}
-
-/**
- * Creates a callback with a constant value over the lifecycle of a component.
- */
-export function useCallbackConst<T extends (...args: any[]) => any>(callback: T): T {
-  return useConst<T>(() => callback);
 }
