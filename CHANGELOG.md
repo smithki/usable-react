@@ -1,3 +1,15 @@
+# v6.0.1 (Thu Oct 06 2022)
+
+#### ⚠️ Pushed to `master`
+
+- QoL updates for 'useForceUpdate' and 'useAsyncEffect' ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v6.0.0 (Fri Aug 19 2022)
 
 #### 💥 Breaking Change
