@@ -39,11 +39,11 @@ export interface AsyncEffectInit<ResultType> {
  * before the async work is finished.
  */
 export function useAsyncEffect<ResultType = any>(
-  initFactory: () => AsyncEffectInit<ResultType>,
+  initFactory: AsyncEffectInit<ResultType> | (() => AsyncEffectInit<ResultType>),
   deps: DependencyList = [],
 ): void {
   const init = useMemo<AsyncEffectInit<ResultType>>(() => {
-    return initFactory();
+    return typeof initFactory === 'function' ? initFactory() : initFactory;
   }, deps);
 
   const isMounted = useIsMounted();
