@@ -1,7 +1,7 @@
 import { DependencyList, useEffect, useRef, useState } from 'react';
 
 import { ElementOrRef, resolveElement } from '../../utils/element-refs';
-import { useCallbackConst } from '../use-const';
+import { useCallbackConst } from '../use-callback-const';
 import { useIsMounted } from '../use-is-mounted';
 
 function hasIntersectionObserver() {

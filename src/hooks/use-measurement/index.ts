@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { ReactRef } from '../../utils/element-refs';
-import { useCallbackConst } from '../use-const';
+import { useCallbackConst } from '../use-callback-const';
 import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
 import { useResizeObserver } from '../use-resize-observer';
 

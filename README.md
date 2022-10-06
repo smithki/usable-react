@@ -22,6 +22,8 @@ npm install usable-react
 ## Documentation
 
 - [`useAsyncEffect`](./docs/use-async-effect.md)
+- [`useCallbackConst`](./docs/use-callback-const.md)
+- [`useCallbackRef`](./docs/use-callback-ref.md)
 - [`useClickOutside`](./docs/use-click-outside.md)
 - [`useClipboard`](./docs/use-clipboard.md)
 - [`useCompare`](./docs/use-compare.md)
@@ -46,4 +48,5 @@ npm install usable-react
 - [`usePrevious`](./docs/use-previous.md)
 - [`useResizeObserver`](./docs/use-resize-observer.md)
 - [`useTimer`](./docs/use-timer.md)
+- [`useValueRef`](./docs/use-value-ref.md)
 

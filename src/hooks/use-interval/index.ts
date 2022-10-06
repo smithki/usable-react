@@ -1,6 +1,6 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
-import { useCallbackConst } from '../use-const';
+import { useCallbackConst } from '../use-callback-const';
 import { useEffectTrigger } from '../use-effect-trigger';
 import { useInitialRender } from '../use-initial-render';
 
