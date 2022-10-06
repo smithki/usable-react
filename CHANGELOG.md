@@ -1,3 +1,15 @@
+# v6.1.0 (Thu Oct 06 2022)
+
+#### 🚀 Enhancement
+
+- New hooks: `useConst`, `useIntersectionObserver`, `useMeasurement`, and `useResizeObserver` [#43](https://github.com/smithki/usable-react/pull/43) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v6.0.1 (Thu Oct 06 2022)
 
 #### ⚠️ Pushed to `master`
