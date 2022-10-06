@@ -1,3 +1,15 @@
+# v6.2.0 (Thu Oct 06 2022)
+
+#### 🚀 Enhancement
+
+- New hooks: `useCallbackConst`, `useCallbackRef`, and `useValueRef` [#44](https://github.com/smithki/usable-react/pull/44) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v6.1.0 (Thu Oct 06 2022)
 
 #### 🚀 Enhancement
