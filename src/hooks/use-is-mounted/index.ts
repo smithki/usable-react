@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { useCallbackConst } from '../use-const';
+import { useCallbackConst } from '../use-callback-const';
 import { useEffectOnce } from '../use-effect-once';
 
 /**

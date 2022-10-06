@@ -4,7 +4,7 @@
 import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 
 import { isDocument, isElement, isRefObject, isWindow } from '../../utils/instance-of';
-import { useCallbackConst } from '../use-const';
+import { useCallbackConst } from '../use-callback-const';
 
 export interface AddEventListenerFunction<
   T extends HTMLElement | Window | Document,

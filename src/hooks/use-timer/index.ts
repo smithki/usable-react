@@ -1,7 +1,7 @@
 import { DependencyList, EffectCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 
+import { useCallbackConst } from '../use-callback-const';
 import { useCompare } from '../use-compare';
-import { useCallbackConst } from '../use-const';
 
 export interface TimerHook {
   /**
