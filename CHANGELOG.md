@@ -1,3 +1,15 @@
+# v7.0.0 (Fri Oct 21 2022)
+
+#### 💥 Breaking Change
+
+- Rework `useTimer` [#46](https://github.com/smithki/usable-react/pull/46) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v6.2.0 (Thu Oct 06 2022)
 
 #### 🚀 Enhancement
