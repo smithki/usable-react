@@ -1,3 +1,15 @@
+# v7.0.1 (Fri May 19 2023)
+
+#### 🐛 Bug Fix
+
+- Fix `useInterval` for strict mode [#48](https://github.com/smithki/usable-react/pull/48) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v7.0.0 (Fri Oct 21 2022)
 
 #### 💥 Breaking Change
