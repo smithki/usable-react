@@ -24,10 +24,10 @@ export function useInterval(effect: EffectCallback, deps: DependencyList, interv
   }, [...deps]);
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const id = setInterval(() => {
       triggerInterval();
     }, interval);
-    return () => clearTimeout(id);
+    return () => clearInterval(id);
   }, [triggerInterval, interval]);
 
   const clear = useCallbackConst(() => {
