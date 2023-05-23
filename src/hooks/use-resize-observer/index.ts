@@ -1,6 +1,6 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
-import { ReactRef } from '../../utils/element-refs';
+import { ElementOrRef, resolveElement } from '../../utils/element-refs';
 import { useIsMounted } from '../use-is-mounted';
 
 function hasResizeObserver() {
@@ -18,7 +18,7 @@ function hasResizeObserver() {
  *   - Skip the callback intersection callback if component is not mounted
  */
 export function useResizeObserver<T extends Element>(
-  ref: ReactRef<T>,
+  ref: ElementOrRef<T>,
   onResize: () => void = () => {},
   deps: DependencyList = [],
 ) {
@@ -30,7 +30,7 @@ export function useResizeObserver<T extends Element>(
   }, [onResize]);
 
   useEffect(() => {
-    const element = ref?.current;
+    const element = resolveElement(ref);
     if (!element) return;
 
     const listener = () => onResizeRef.current();
