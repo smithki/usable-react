@@ -1,3 +1,15 @@
+# v7.0.2 (Tue May 23 2023)
+
+#### 🐛 Bug Fix
+
+- Allow for elements to be passed directly to `useResizeObserver` or `useMeasurement` hooks [#49](https://github.com/smithki/usable-react/pull/49) ([@smithki](https://github.com/smithki))
+
+#### Authors: 1
+
+- Ian K Smith ([@smithki](https://github.com/smithki))
+
+---
+
 # v7.0.1 (Fri May 19 2023)
 
 #### 🐛 Bug Fix
